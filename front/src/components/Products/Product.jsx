@@ -1,6 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@mui/material';
-import clsx from 'clsx';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -12,56 +10,33 @@ import Typography from '@mui/material/Typography';
 import {AddShoppingCart} from '@mui/icons-material/';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import accounting from 'accounting';
-
-
-
-// const useStyles = makeStyles((theme) => ({
-//     root: {
-//         maxWidth: 345,
-//     }, 
-//     action: {
-//       marginTop: '1rem',
-//     },
-//     media: {
-//         heigth: 0,
-//         paddingTop: '56.25%',
-//     },
-//     expand: {
-//         transform: 'rotate(0deg)',
-//         marginLeft: 'auto',
-//         transition: theme.transition.create('transform', {
-//             duration: theme.transition.duration.shortest,
-//         }),
-//     },
-// }));
-
+import st from '../Products/product.module.css';
 
 function Product() {
-    // const classes = useStyles() 
+    
     const [expanded, setExpanded] = React.useState(false);
     const handleExpandClick = () => {
         setExpanded(!expanded)
     };
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <div className={st.root} >
+    <Card classNmae={null} >
       <CardHeader
-        action={
-          <Typography variant='h5' color='textSecondary' >
+        action = {
+          <Typography className={null} variant='h5' color='textSecondary' >
                 {accounting.formatMoney(50)}
           </Typography>
         }
         title='Shoes'
         subheader="In Stock"
       />
-      <CardMedia
-        component="img"
-        height="194"
-        image = ''
+      <CardMedia className={null}
+      image={null}
         title='Shoes Nike'
       />
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" color="text.seconda ry">
           Running Shoes
         </Typography>
       </CardContent>
@@ -75,12 +50,10 @@ function Product() {
           ))}
         </IconButton>
         <IconButton
-            // className={clsx(classes.expand, {
-            //     [classes.expandOpen]: expanded,
-            // })}
-            // onClick={handleExpandClick}
-            // aria-expanded={expanded}
-            // aria-label="show more"
+            className={null}
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
+            aria-label="show more"
         >
           <ExpandMoreIcon />
         </IconButton>
@@ -93,6 +66,7 @@ function Product() {
         </CardContent>
       </Collapse> 
     </Card>
+    </div>
   );
 };
 

@@ -1,0 +1,22 @@
+.root {
+    margin-top: 10%;
+};
+.action {
+    margin-top: '10rem';
+  };
+.media {
+    height: 10;
+    padding-top: '56.25%';
+};
+.expand {
+    transform: 'rotate(0deg)';
+    margin-left: 'auto';
+    
+};
+.expandOpen {
+  transform: 'rotate(180deg)';
+};
+
+.img {
+  background-image: url('../Products/img/nike.jpg');
+}
