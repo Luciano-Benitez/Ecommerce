@@ -7,12 +7,11 @@ import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import {AddShoppingCart} from '@mui/icons-material/';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import accounting from 'accounting';
-import st from '../Products/product.module.css';
+import st from '../Checkout/CheckoutCard.module.css';
 
-function Product({product: {id, name, productType, image, price, rating, description}}) {
+const CheckoutCard = ({product: {id, name, productType, image, price, rating, description}}) => {
     
     const [expanded, setExpanded] = React.useState(false);
     const handleExpandClick = () => {
@@ -21,17 +20,17 @@ function Product({product: {id, name, productType, image, price, rating, descrip
 
   return (
     <div className={st.root} >
-    <Card className={null} >
+    <Card>
       <CardHeader
         action = {
-          <Typography className={null} variant='h5' color='textSecondary' >
+          <Typography  variant='h5' color='textSecondary' >
                 {accounting.formatMoney(price)}
           </Typography>
         }
         title={name}
         subheader='In Stock'
       />
-      <CardMedia className={null}
+      <CardMedia 
       image={image}
         title={name}
       />
@@ -40,22 +39,12 @@ function Product({product: {id, name, productType, image, price, rating, descrip
           {productType}
         </Typography>
       </CardContent>
-      <CardActions className={st.cardAct}>
-        <IconButton aria-label="add to cart">
-          <AddShoppingCart fontSize='large' />
-        </IconButton>
-        <IconButton>
+      <CardActions disableSpacing className={st.cardAct}>
           {Array(rating).fill().map((_, i) => (
-            <p>&#11088;</p>
+            <p >&#11088;</p>
           ))}
-        </IconButton>
-        <IconButton
-            
-            onClick={handleExpandClick}
-            aria-expanded={expanded}
-            aria-label="show more"
-        >
-          <ExpandMoreIcon  />
+        <IconButton aria-label="add to cart">
+          <DeleteRoundedIcon fontSize='large' />
         </IconButton>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
@@ -68,4 +57,4 @@ function Product({product: {id, name, productType, image, price, rating, descrip
   );
 };
 
-export default Product;
+export default CheckoutCard;

@@ -1,19 +1,22 @@
-
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Products from './components/Products/Products';
 import NavBar from './components/NavBar/NavBar';
+import Products from './components/Products/Products';
+import CheckoutPage from './components/Checkout/CheckoutPage';
+import Loguin from './components/Sessions/Loguin';
 
 function App() {
   return (
     <BrowserRouter>
+        <NavBar/>
         <Routes>
-
-          <Route path="/" element={<><NavBar/><Products/></>}/>
+        <Route exact path="/" element={<Products/>}/>
+        <Route exact path="/CheckoutPage" element={<CheckoutPage/>}/>
+        <Route exact path="/Loguin" element={<Loguin/>}/>
           
         </Routes>
-    </BrowserRouter>
+    </BrowserRouter> 
   );
-}
+};
 
 export default App;

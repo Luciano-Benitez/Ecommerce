@@ -1,0 +1,12 @@
+.Principal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 20vh;
+    padding: 5rem;
+};
+
+.Button {
+    margin-top: 2rem;
+};

@@ -1,7 +1,6 @@
 
-
 const initialState = {
- 
+    CheckOut: [],
 };
 
 const reducer = (state = initialState, {type, payload}) => {
