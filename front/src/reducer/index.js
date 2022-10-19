@@ -1,7 +1,8 @@
-import {ADD_TO_CART, REMOVE_CART} from '../actions/types';
+import {ADD_TO_CART, REMOVE_CART, LOGIN_USER} from '../actions/types';
 
 const initialState = {
     ShoppingCart: [],
+    User: [],
 };
 
 const reducer = (state = initialState, {type, payload}) => {
@@ -16,6 +17,12 @@ const reducer = (state = initialState, {type, payload}) => {
             return {
                 ...state,
                 ShoppingCart: state.ShoppingCart.filter(e => e.id !== payload)
+            };
+        
+        case LOGIN_USER:
+            return {
+                ...state,
+                User: payload
             };
 
         default:

@@ -1,4 +1,5 @@
 import React from 'react';
+import {useDispatch} from 'react-redux';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,14 +13,14 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {loginUser} from '../../actions/index';
+import st from './SignIn.module.css';
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
+        www.ecommerce.com
       {new Date().getFullYear()}
       {'.'}
     </Typography>
@@ -29,18 +30,29 @@ function Copyright(props) {
 const theme = createTheme();
 
  const SignIn = () => {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+
+  const dispatch = useDispatch();
+  const [state, setState] = React.useState({
+    email:'',
+    password:''
+  });
+
+  const onChange = (e) => {
+    setState({
+      ...state,
+      [e.target.name]: e.target.value
+    })
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(loginUser(state.email, state.password));
+    setState({email:'', password:''});
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+    <ThemeProvider theme={theme}  >
+      <Container component="main" maxWidth="xs" className={st.b1} >
         <CssBaseline />
         <Box
           sx={{
@@ -64,6 +76,9 @@ const theme = createTheme();
               id="email"
               label="Email Address"
               name="email"
+              type= 'text'
+              value={state.email}
+              onChange={onChange}
               autoComplete="email"
               autoFocus
             />
@@ -71,18 +86,21 @@ const theme = createTheme();
               margin="normal"
               required
               fullWidth
+              id="password"
               name="password"
               label="Password"
               type="password"
-              id="password"
+              value={state.password}
+              onChange={onChange}
               autoComplete="current-password"
             />
-            <FormControlLabel
+            {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
-            />
+            /> */}
             <Button
               type="submit"
+              disabled={!state.email || !state.password}
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
@@ -96,8 +114,8 @@ const theme = createTheme();
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                <Link href="/SignUp" variant="body2">
+                  Don't have an account? Sign Up
                 </Link>
               </Grid>
             </Grid>

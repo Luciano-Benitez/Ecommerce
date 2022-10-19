@@ -1,5 +1,6 @@
-import {ADD_TO_CART, REMOVE_CART} from './types';
-
+import {ADD_TO_CART, REMOVE_CART, LOGIN_USER} from './types';
+import {fetchLogin} from '../helpers/search-backend';
+import Swl from 'sweetalert2';
 
 export  const Cart = (objCart) => ({
     type: ADD_TO_CART,
@@ -10,3 +11,21 @@ export  const remove_cart = (id) => ({
     type: REMOVE_CART,
     payload: id
 });
+
+export const loguin = (user) => ({
+    type: LOGIN_USER,
+    payload: user
+});
+
+export const loginUser = (email, password) => {
+    return async (dispatch) => {
+        const data = await fetchLogin('login',{email, password});
+        const body = await data.json();
+        if(body.isVerified){
+            localStorage.setItem('token: ', body.token);
+            dispatch(loguin({id: body.id, email: body.email, role: body.role}))
+        } else {
+            Swl.fire(`${body.msg}`);
+        }
+    }
+};
