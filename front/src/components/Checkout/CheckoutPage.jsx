@@ -1,16 +1,17 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import CheckoutCard from '../Checkout/CheckoutCard';
-import {products} from '../../utils/ProductData'
 import st from './CheckoutPage.module.css';
 import Total from '../Total/Total';
 
 function FormRow() {
+    const Products = useSelector(state => state.ShoppingCart);
     return (
         <React.Fragment>
             {
-            products.map(element => (
+            Products?.map(element => (
             <Grid item xs={12} sm={6} md={4} lg={3} >
                 <CheckoutCard key={element.id} product={element}  />
             </Grid>
@@ -22,6 +23,7 @@ function FormRow() {
 };
 
 const CheckoutPage = () => {
+
     return (
     <div className={st.Principal} >
         <Grid container spacing={3}>

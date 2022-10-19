@@ -1,4 +1,5 @@
 import React from 'react';
+import {useSelector} from 'react-redux';
 import {Link} from 'react-router-dom';
 import st from './Nav.module.css';
 import AppBar from '@mui/material/AppBar';
@@ -12,6 +13,8 @@ import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
 import Badge from '@mui/material/Badge';
 
 export default function NavBar() {
+
+  const cartLength = useSelector(state => state.ShoppingCart?.length);
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar  position="fixed" color='default' > 
@@ -28,9 +31,9 @@ export default function NavBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             ¡Bienvenido!
           </Typography>
-          <Link to='/Loguin' ><Button variant='outlined' ><strong>Login</strong></Button></Link>
+          <Link to='/SignIn' ><Button variant='outlined' ><strong>Sign In</strong></Button></Link>
           <IconButton  color='inherit' >
-            <Badge badgeContent={4} color="secondary" >
+            <Badge badgeContent={cartLength} color="secondary" >
                 <Link to='/CheckoutPage' ><ShoppingCartRoundedIcon  fontSize='large'/></Link>
             </Badge>
           </IconButton>
