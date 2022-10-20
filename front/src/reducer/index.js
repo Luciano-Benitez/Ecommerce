@@ -1,4 +1,4 @@
-import {ADD_TO_CART, REMOVE_CART, LOGIN_USER} from '../actions/types';
+import {ADD_TO_CART, REMOVE_CART, LOGIN_USER, POST_USER} from '../actions/types';
 
 const initialState = {
     ShoppingCart: [],
@@ -23,6 +23,11 @@ const reducer = (state = initialState, {type, payload}) => {
             return {
                 ...state,
                 User: payload
+            };
+
+        case POST_USER:
+            return {
+                ...state
             };
 
         default:

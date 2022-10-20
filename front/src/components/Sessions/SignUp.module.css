@@ -1,0 +1,6 @@
+.base {
+    display: flex;
+    padding: 2rem;
+    margin-top: 5%;
+    justify-content: center
+};

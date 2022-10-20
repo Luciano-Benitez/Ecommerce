@@ -1,6 +1,7 @@
 import {ADD_TO_CART, REMOVE_CART, LOGIN_USER} from './types';
 import {fetchLogin} from '../helpers/search-backend';
 import Swl from 'sweetalert2';
+import axios from 'axios';
 
 export  const Cart = (objCart) => ({
     type: ADD_TO_CART,
@@ -27,5 +28,12 @@ export const loginUser = (email, password) => {
         } else {
             Swl.fire(`${body.msg}`);
         }
+    }
+};
+
+export function postUser(payload){
+    return async function() {
+        const resultPost = await axios.post('http://localhost:3001/postUser', payload);
+        return resultPost
     }
 };
