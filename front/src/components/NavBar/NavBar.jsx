@@ -1,7 +1,9 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 import {Link} from 'react-router-dom';
-import st from './Nav.module.css';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+// import st from './NavBar.module.css';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -11,14 +13,26 @@ import IconButton from '@mui/material/IconButton';
 import HomeIcon from '@mui/icons-material/Home';
 import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
 import Badge from '@mui/material/Badge';
+import {startLogout} from '../../actions/index';
 
 export default function NavBar() {
 
+  const History = useNavigate();
+  const dispatch = useDispatch();
+  
   const cartLength = useSelector(state => state.ShoppingCart?.length);
+  const nameUser = useSelector(state => state.User.name);
+  const userOn = useSelector(state => state.User);
+
+  const Logout = () => { //Funcion de Cerrar Sesion.
+      dispatch(startLogout());
+      History('/');
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar  position="fixed" color='default' > 
-        <Toolbar  > 
+        <Toolbar> 
           <IconButton
             size="large"
             edge="start"
@@ -28,10 +42,13 @@ export default function NavBar() {
           >
             <Link to='/' ><HomeIcon fontSize='large' /></Link>
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            ¡Bienvenido!
+          <Typography textAlign='center' variant="h5" component="div" sx={{ flexGrow: 1 }}>
+            {nameUser?'¡Bienvenido '+ nameUser + '!' : 'www.ecommerce.com'}
           </Typography>
-          <Link to='/SignIn' ><Button variant='outlined' ><strong>Sign In</strong></Button></Link>
+          {userOn.length === 0 ?
+            <Button href='SignIn' variant='outlined'><strong>Sign in</strong></Button> :
+            <Button variant='outlined' onClick={Logout} ><strong>Sign Out</strong></Button>
+          }
           <IconButton  color='inherit' >
             <Badge badgeContent={cartLength} color="secondary" >
                 <Link to='/CheckoutPage' ><ShoppingCartRoundedIcon  fontSize='large'/></Link>

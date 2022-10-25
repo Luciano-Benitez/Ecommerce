@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import accounting from 'accounting';
 import {remove_cart} from '../../actions/index';
-import st from '../Checkout/CheckoutCard.module.css';
+import st from './CheckoutCard.module.css';
 
 const CheckoutCard = ({product: {id, name, productType, image, price, rating, description}}) => {
 

@@ -1,8 +1,9 @@
-import {ADD_TO_CART, REMOVE_CART, LOGIN_USER, POST_USER} from '../actions/types';
+import {ADD_TO_CART, REMOVE_CART, LOGIN_USER, POST_USER, LOGOUT, SHIPPING_DATA} from '../actions/types';
 
 const initialState = {
     ShoppingCart: [],
     User: [],
+    ShippingData: {},
 };
 
 const reducer = (state = initialState, {type, payload}) => {
@@ -28,6 +29,19 @@ const reducer = (state = initialState, {type, payload}) => {
         case POST_USER:
             return {
                 ...state
+            };
+
+        case LOGOUT:
+            return {
+                ...state,
+                ShoppingCart:[],
+                User: []
+            };
+
+        case SHIPPING_DATA:
+            return {
+                ...state,
+                ShippingData: {...state.ShippingData, payload}
             };
 
         default:

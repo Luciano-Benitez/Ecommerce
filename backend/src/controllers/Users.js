@@ -109,6 +109,7 @@ exports.loginUsers = async(req, res = response) => {
         res.status(200).json({
             id: User.id,
             email: User.email,
+            name: User.name,
             role: User.role,
             isVerified: User.isVerified,
             token

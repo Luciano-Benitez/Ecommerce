@@ -1,5 +1,6 @@
 import React from 'react';
 import {useDispatch} from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -29,9 +30,10 @@ function Copyright(props) {
 
 const theme = createTheme();
 
- const SignIn = () => {
+export default function SignIn () {
 
   const dispatch = useDispatch();
+  const history = useNavigate();
   const [state, setState] = React.useState({
     email:'',
     password:''
@@ -48,6 +50,7 @@ const theme = createTheme();
     e.preventDefault();
     dispatch(loginUser(state.email, state.password));
     setState({email:'', password:''});
+    history('/');
   };
 
   return (
@@ -105,7 +108,7 @@ const theme = createTheme();
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Login
             </Button>
             <Grid container>
               <Grid item xs>
@@ -127,4 +130,3 @@ const theme = createTheme();
   );
 };
 
-export default SignIn;

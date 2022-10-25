@@ -14,7 +14,7 @@ const Total = () => {
         <div className={st.Principal} >
             <h5>Total Items: {Items}</h5>
             <h5>{accounting.formatMoney(Total)}</h5>
-            <Button className={st.Button} variant='contained' color='secondary' >Check Out</Button>
+            <Button href='/CheckOut' className={st.Button} variant='contained' color='success' >Check Out</Button>
         </div>
     );
 };
