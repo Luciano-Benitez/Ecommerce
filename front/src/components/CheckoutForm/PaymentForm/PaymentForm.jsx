@@ -1,9 +1,12 @@
-import React from 'react'
+import React from 'react';
+import Review from '../Review/Review';
 
-function PaymentForm() {
+function PaymentForm({backStep ,nextStep}) {
   return (
-    <div>PaymentForm</div>
+    <>
+      <Review/>
+    </>
   )
-}
+};
 
 export default PaymentForm;

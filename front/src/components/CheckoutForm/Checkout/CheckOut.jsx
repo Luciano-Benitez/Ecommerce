@@ -7,7 +7,7 @@ import PaymentForm from '../PaymentForm/PaymentForm';
 export default function CheckOut() {
   const steps = ['Shipping address', 'Payments details'];
   const [activeStep, setActiveStep] = React.useState(0);
-  const Form = () => activeStep === 0 ? <AddressForm nextStep={nextStep} /> : <PaymentForm backStep={backStep} />
+  const Form = () => activeStep === 0 ? <AddressForm nextStep={nextStep} /> : <PaymentForm backStep={backStep} nextStep={nextStep}/>
   const nextStep = () => setActiveStep(prevActiveSter => prevActiveSter + 1);
   const backStep = () => setActiveStep(prevActiveSter => prevActiveSter - 1);
   return (
