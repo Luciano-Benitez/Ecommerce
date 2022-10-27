@@ -46,7 +46,7 @@ export default function NavBar() {
             {nameUser?'¡Bienvenido '+ nameUser + '!' : 'www.ecommerce.com'}
           </Typography>
           {userOn.length === 0 ?
-            <Button href='SignIn' variant='outlined'><strong>Sign in</strong></Button> :
+            <Button component={Link} to='/SignIn' variant='outlined'><strong>Sign in</strong></Button> :
             <Button variant='outlined' onClick={Logout} ><strong>Sign Out</strong></Button>
           }
           <IconButton  color='inherit' >

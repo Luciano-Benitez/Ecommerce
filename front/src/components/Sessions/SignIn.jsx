@@ -97,10 +97,6 @@ export default function SignIn () {
               onChange={onChange}
               autoComplete="current-password"
             />
-            {/* <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            /> */}
             <Button
               type="submit"
               disabled={!state.email || !state.password}

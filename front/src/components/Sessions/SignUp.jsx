@@ -1,75 +1,120 @@
 import React from 'react';
-import {Link, useNavigate} from 'react-router-dom';
-import { useDispatch } from "react-redux";
-import st from './SignUp.module.css';
+import { useNavigate } from 'react-router-dom';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {useDispatch} from 'react-redux'
 import {postUser} from '../../actions/index';
 
+function Copyright(props) {
+    return (
+      <Typography variant="body2" color="text.secondary" align="center" {...props}>
+        {'Copyright © '}
+          www.ecommerce.com
+        {new Date().getFullYear()}
+        {'.'}
+      </Typography>
+    );
+  }
 
-
-
-export default function SignUp(){
-
-    const history = useNavigate();
+export default function SignUp() {
+    const theme = createTheme();
     const dispatch = useDispatch();
+    const history = useNavigate();
 
-    function validate (state){
-        let errors = {};
-    
-        if(!state.name){
-            errors.name = undefined
-        } else if(!state.email){
-            errors.email = undefined
-        } else if(!state.password){
-            errors.password = undefined
-        } 
-        return errors;
-    };
-    const [errors, setErrors] = React.useState({});
     const [state, setState] = React.useState({
-        name: '',
-        email: '',
-        role: 'User',
+        name:'',
+        email:'',
+        role:'User',
         password: '',
-        img: '',
+        img: "",
         isVerified: false
     });
 
-    const handleChanges = (e) => {
+    const handleChange = (e) => {
         setState({
             ...state,
             [e.target.name]: e.target.value
-        })
-        setErrors(validate({
-            ...state,
-            [e.target.name]: e.target.value
-        }))
+        });
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(postUser(state));
-        alert('¡El Usuario fue creado con exito!');
-        setState({name: '', email: '', password: '', img: ''});
+        alert(`¡Cuenta creada con exito!. Por favor confirme su cuenta a travez de su correo ${state.email}`);
+        setState({name: '', email: '', password: ''});
         history('/');
     };
 
-    return(
-        <div className={st.base} >
-            <form onSubmit={handleSubmit} >
-                <Link className={null} to={'/'}>Volver</Link>
-                <label for='name' >Full Name:
-                    <input id='name' type="text" name="name" value={state.name} onChange={handleChanges}/>
-                </label>
-
-                <label for='email' >e-mail:
-                    <input id='email' type="text" name="email" value={state.email} onChange={handleChanges}/>
-                </label>
-
-                <label for='password' >Password:
-                    <input id='password' type="text" name="password" value={state.password} onChange={handleChanges}/>
-                </label>
-                <button type="submit">¡Crear Usuario!</button>
-            </form>
-        </div>
-    );
+  return (
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs">
+        <Box
+          sx={{
+            marginTop: 12,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign up
+          </Typography>
+          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} >
+                <TextField
+                  required
+                  fullWidth
+                  id="fullName"
+                  label="Full Name"
+                  name="name"
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  onChange={handleChange}
+                />
+              </Grid>
+            </Grid>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign Up
+            </Button>
+          </Box>
+        </Box>
+        <Copyright/>
+      </Container>
+    </ThemeProvider>
+  );
 };

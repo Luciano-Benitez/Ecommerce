@@ -1,4 +1,6 @@
-import {ADD_TO_CART, REMOVE_CART, LOGIN_USER, LOGOUT, SHIPPING_DATA} from './types';
+import {ADD_TO_CART, REMOVE_CART, LOGIN_USER, LOGOUT, SHIPPING_DATA,
+        SET_PAYMENT_MESSAGE, EMPTY_CART} from './types';
+
 import {fetchLogin} from '../helpers/search-backend';
 import Swl from 'sweetalert2';
 import axios from 'axios';
@@ -11,6 +13,11 @@ export  const Cart = (objCart) => ({
 export  const remove_cart = (id) => ({
     type: REMOVE_CART,
     payload: id
+});
+
+export const emptyCart = (e) =>({
+    type:EMPTY_CART,
+    payload: e
 });
 
 export function postUser(payload){
@@ -52,4 +59,9 @@ export const startLogout = () => {
 export const shippingData = (data) => ({
         type: SHIPPING_DATA,
         payload: data
+});
+
+export const paymentMessage = (msg) => ({
+    type: SET_PAYMENT_MESSAGE,
+    payload: msg
 });
