@@ -11,16 +11,14 @@ import CheckOut from './components/CheckoutForm/Checkout/CheckOut';
 function App() {
   return (
     <BrowserRouter>
-        <NavBar/>
-        <Routes>
-        <Route exact path="/" element={<Products/>}/>
-        <Route exact path="/SignIn" element={<SignIn/>}/>
-        <Route exact path="/SignUp" element={<SignUp/>}/>
-        <Route exact path="/ConfirmAccount" element={<ConfirmAccount/>}/>
-        <Route exact path="/CheckoutPage" element={<CheckoutPage/>}/>
-        <Route exact path="/CheckOut" element={<CheckOut/>}/>
-          
-        </Routes>
+      <Routes>
+        <Route exact path="/" element={<><NavBar/><Products/></>}/>
+        <Route exact path="/SignIn" element={<><NavBar/><SignIn/></>}/>
+        <Route exact path="/SignUp" element={<><NavBar/><SignUp/></>}/>
+        <Route exact path="/ConfirmAccount" element={<><NavBar/><ConfirmAccount/></>}/>
+        <Route exact path="/CheckoutPage" element={<><NavBar/><CheckoutPage/></>}/>
+        <Route exact path="/CheckOut" element={<><NavBar/><CheckOut/></>}/>
+      </Routes>
     </BrowserRouter> 
   );
 };

@@ -12,9 +12,21 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false
         },
+        productType: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         price: {
             type: DataTypes.FLOAT,
             allowNull: false
+        },
+        rating: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+        image: {
+            type: DataTypes.ARRAY(DataTypes.TEXT),
+            allowNull: false,
         },
         description: {
             type: DataTypes.TEXT,

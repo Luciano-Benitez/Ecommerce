@@ -10,7 +10,8 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {useDispatch} from 'react-redux'
-import {postUser} from '../../actions/index';
+import {postUser, uploadImageCloud} from '../../actions/index';
+
 
 function Copyright(props) {
     return (
@@ -36,11 +37,25 @@ export default function SignUp() {
         img: "",
         isVerified: false
     });
+    console.log('state:', state);
 
     const handleChange = (e) => {
         setState({
             ...state,
             [e.target.name]: e.target.value
+        });
+    };
+
+    const uploadImage = async (e) => {
+        const formData = new FormData()
+        formData.append("file", e.target.files[0])
+        formData.append("upload_preset", "ecommerce-products")
+    
+        const linkImg = await dispatch(uploadImageCloud(formData));
+        console.log('linkImg:',linkImg);
+        setState({
+          ...state,
+          img: linkImg
         });
     };
 
@@ -100,6 +115,17 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  type="file"
+                  name="file"
+                  id="file"
+                  // label="File"
+                  onChange={uploadImage}
+                  fullWidth
                 />
               </Grid>
             </Grid>

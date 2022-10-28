@@ -40,7 +40,7 @@ function Product({product: {id, name, productType, image, price, rating, descrip
         subheader='In Stock'
       />
       <CardMedia className={null}
-      image={image}
+        image={image}
         title={name}
       />
       <CardContent>
@@ -58,12 +58,11 @@ function Product({product: {id, name, productType, image, price, rating, descrip
           ))}
         </IconButton>
         <IconButton
-            
             onClick={handleExpandClick}
             aria-expanded={expanded}
             aria-label="show more"
         >
-          <ExpandMoreIcon  />
+          <ExpandMoreIcon/>
         </IconButton>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>

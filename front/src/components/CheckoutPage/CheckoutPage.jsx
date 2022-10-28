@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import CheckoutCard from './CheckoutCard';
 import st from './CheckoutPage.module.css';
 import Total from './Total/Total';
+import { Alert } from '@mui/material'
 
 function FormRow() {
     const Products = useSelector(state => state.ShoppingCart);
@@ -23,7 +24,7 @@ function FormRow() {
 };
 
 const CheckoutPage = () => {
-
+    const User = useSelector(state => state.User);
     return (
     <div className={st.Principal} >
         <Grid container spacing={3}>
@@ -36,9 +37,16 @@ const CheckoutPage = () => {
                 <FormRow/>
             </Grid>
             <Grid item xs={12} sm={4} md={3} container spacing={3}>
-                <Typography align='center' gutterButtom variant='h4' >
-                    <Total/>
-                </Typography>
+                {
+                    User.length === 0 ?
+                    (<div>
+                        <Alert severity='warning' size='' >
+                        <strong>Inicie sesión para ingresar a la pasarela de compra.</strong>
+                        </Alert>
+                    </div>) :
+                    (<Typography align='center' gutterButtom variant='h4' ><Total/></Typography>)
+                }
+                
             </Grid>
         </Grid>
     </div>

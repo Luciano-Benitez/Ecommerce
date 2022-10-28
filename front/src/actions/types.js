@@ -6,3 +6,4 @@ export const POST_USER = 'POST_USER';
 export const LOGOUT = 'LOGOUT';
 export const SHIPPING_DATA = 'SHIPPING_DATA';
 export const SET_PAYMENT_MESSAGE = 'SET_PAYMENT_MESSAGE';
+export const GET_PRODUCTS = 'GET_PRODUCTS';

@@ -25,8 +25,7 @@ export default function NavBar() {
   const userOn = useSelector(state => state.User);
 
   const Logout = () => { //Funcion de Cerrar Sesion.
-      dispatch(startLogout());
-      History('/');
+    dispatch(startLogout());
   };
 
   return (

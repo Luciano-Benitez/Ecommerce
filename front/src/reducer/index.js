@@ -1,7 +1,8 @@
 import {ADD_TO_CART, REMOVE_CART, LOGIN_USER, POST_USER,
-        LOGOUT, SHIPPING_DATA, SET_PAYMENT_MESSAGE, EMPTY_CART} from '../actions/types';
+        LOGOUT, SHIPPING_DATA, SET_PAYMENT_MESSAGE, EMPTY_CART,GET_PRODUCTS} from '../actions/types';
 
 const initialState = {
+    allProducts: [],
     ShoppingCart: [],
     User: [],
     ShippingData: {},
@@ -56,6 +57,12 @@ const reducer = (state = initialState, {type, payload}) => {
             return {
                 ...state,
                 PaymentMessage: payload
+            };
+
+        case GET_PRODUCTS:
+            return {
+                ...state,
+                allProducts: payload
             };
 
         default:

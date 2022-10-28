@@ -50,19 +50,8 @@ exports.getProducts = async(req, res) => {
             attributes: {
                 exclude: ["createdAt", "updatedAt"],
               },
-            include: [
-                {
-                    model: Categories,
-                    attributes: ['id', 'name']
-                },
-                {
-                    model: Stores,
-                    attributes: ['id', 'name'] 
-                }
-
-            ]
         });
-        allProducts.length > 0 ?
+        allProducts !== undefined ?
         res.status(200).send(allProducts) :
         res.status(404).json('El producto que busca no se Encuentra en la DB.')
     } catch (error) {

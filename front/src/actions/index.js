@@ -1,7 +1,8 @@
 import {ADD_TO_CART, REMOVE_CART, LOGIN_USER, LOGOUT, SHIPPING_DATA,
-        SET_PAYMENT_MESSAGE, EMPTY_CART} from './types';
+        SET_PAYMENT_MESSAGE, EMPTY_CART, GET_PRODUCTS} from './types';
 
 import {fetchLogin} from '../helpers/search-backend';
+import {cloudynary} from '../helpers/Cloudinary';
 import Swl from 'sweetalert2';
 import axios from 'axios';
 
@@ -65,3 +66,22 @@ export const paymentMessage = (msg) => ({
     type: SET_PAYMENT_MESSAGE,
     payload: msg
 });
+
+export const uploadImageCloud = (formData) => {
+    return async () => {
+      const resp = await cloudynary(formData);
+      const body = await resp.data.secure_url;
+      return body;
+    };
+};
+
+export const getProducts = () => {
+    return async function(dispatch){
+        const result = await axios.get('http://localhost:3001/getProducts');
+        return dispatch({
+            type: GET_PRODUCTS,
+            payload: result.data
+        })
+    }
+};
+  
