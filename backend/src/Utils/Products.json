@@ -6,7 +6,7 @@
             "productType": "Running Shoes",
             "price": 50,
             "rating": 4,
-            "image": ["https://res.cloudinary.com/useofcloudinary/image/upload/v1666996269/ecommerce/tnbysykx4uca5rbuzkxc.jpg"],
+            "image": "https://res.cloudinary.com/useofcloudinary/image/upload/v1666898688/cld-sample-5.jpg",
             "description": "Shoes Air our iconic innovation that uses pressurized air in a durable."
         },
         {
@@ -15,7 +15,7 @@
             "productType": "Sport",
             "price": 60,
             "rating": 5,
-            "image": [],
+            "image": "https://res.cloudinary.com/useofcloudinary/image/upload/v1666898688/cld-sample-5.jpg",
             "description": "Shirt Air our iconic innovation that uses pressurized air in a durable."
         },
         {
@@ -24,7 +24,7 @@
             "productType": "Dress Shirt",
             "price": 15,
             "rating": 1,
-            "image": [],
+            "image": "https://res.cloudinary.com/useofcloudinary/image/upload/v1666898688/cld-sample-5.jpg",
             "description": "Shirt Air our iconic innovation that uses pressurized air in a durable."
         },
         {
@@ -33,7 +33,7 @@
             "productType": "Dress Pants",
             "price": 20,
             "rating": 3,
-            "image": [],
+            "image": "https://res.cloudinary.com/useofcloudinary/image/upload/v1666898688/cld-sample-5.jpg",
             "description": "Pants Air our iconic innovation that uses pressurized air in a durable."
     },
     {
@@ -42,7 +42,7 @@
         "productType": "Sport",
         "price": 25,
         "rating": 4,
-        "image": [],
+        "image": "https://res.cloudinary.com/useofcloudinary/image/upload/v1666898688/cld-sample-5.jpg",
         "description": "Pants Air our iconic innovation that uses pressurized air in a durable."
     },
     {
@@ -51,7 +51,7 @@
         "productType": "Traditional Cap",
         "price": 10,
         "rating": 2,
-        "image": [],
+        "image": "https://res.cloudinary.com/useofcloudinary/image/upload/v1666898688/cld-sample-5.jpg",
         "description": "Cap Air our iconic innovation that uses pressurized air in a durable."
     },
     {
@@ -60,7 +60,7 @@
         "productType": "Sport Cap",
         "price": 15,
         "rating": 3,
-        "image":[],
+        "image":"https://res.cloudinary.com/useofcloudinary/image/upload/v1666898688/cld-sample-5.jpg",
         "description": "Cap Air our iconic innovation that uses pressurized air in a durable."
     }
     ]

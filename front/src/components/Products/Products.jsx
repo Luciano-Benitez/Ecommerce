@@ -4,12 +4,10 @@ import Grid from '@mui/material/Grid';
 import Product from '../Products/Product';
 import st from '../Products/products.module.css';
 import {getProducts} from '../../actions/index';
-// import {products} from '../../utils/ProductData'
 
 const Products = () => {
   const dispatch = useDispatch();
   const products = useSelector(state => state.allProducts);
-  console.log('products:',products);
 
   React.useEffect(() => {
     dispatch(getProducts())

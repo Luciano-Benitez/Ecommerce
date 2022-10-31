@@ -13,8 +13,10 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import accounting from 'accounting';
 import st from '../Products/product.module.css';
 import {Cart} from '../../actions/index';
+// import {Zapas} from './img/Zapas.jpg';
 
 function Product({product: {id, name, productType, image, price, rating, description}}) {
+  console.log('image:', image)
     
     const dispatch = useDispatch();
     const [cart] = React.useState({id, name, productType, image, price, rating, description});
@@ -39,10 +41,12 @@ function Product({product: {id, name, productType, image, price, rating, descrip
         title={name}
         subheader='In Stock'
       />
-      <CardMedia className={null}
-        image={image}
-        title={name}
-      />
+      <div className={st.img} >
+        <CardMedia 
+          src={image}
+          title={name}
+        />
+      </div>
       <CardContent>
         <Typography variant="body2" color="text.seconda ry">
           {productType}

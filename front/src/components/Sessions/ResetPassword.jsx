@@ -1,19 +1,16 @@
 import React from 'react';
 import {useDispatch} from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import Avatar from '@mui/material/Avatar';
+import { useNavigate, useParams } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import PasswordIcon from '@mui/icons-material/Password';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import {loginUser} from '../../actions/index';
-import st from './SignIn.module.css';
+import {resetPassword} from '../../actions/index';
+import st from './ResetPassword.module.css';
 
 function Copyright(props) {
   return (
@@ -28,14 +25,17 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignIn () {
+export default function ResetPassword () {
 
   const dispatch = useDispatch();
   const history = useNavigate();
+  const {token} = useParams();
+  
   const [state, setState] = React.useState({
-    email:'',
-    password:''
+    password1:'',
+    password2:''
   });
+  console.log('state:', state)
 
   const onChange = (e) => {
     setState({
@@ -46,8 +46,8 @@ export default function SignIn () {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(loginUser(state.email, state.password));
-    setState({email:'', password:''});
+    dispatch(resetPassword(token, state.password1));
+    setState({password1:'', password2:''});
     history('/');
   };
 
@@ -63,59 +63,44 @@ export default function SignIn () {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
+            <PasswordIcon color="primary" fontSize="large" />
           <Typography component="h1" variant="h5">
-            Sign in
+           Reset Password
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              type= 'text'
-              value={state.email}
+              id="password1"
+              name="password1"
+              label="Insert your password"
+              type="password"
+              value={state.password1}
               onChange={onChange}
-              autoComplete="email"
-              autoFocus
+              
             />
             <TextField
               margin="normal"
               required
               fullWidth
-              id="password"
-              name="password"
-              label="Password"
+              id="password2"
+              name="password2"
+              label="Repeat your password"
               type="password"
-              value={state.password}
+              value={state.password2}
               onChange={onChange}
-              autoComplete="current-password"
+              
             />
             <Button
               type="submit"
-              disabled={!state.email || !state.password}
+              disabled={!state.password1 || !state.password2}
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Login
+              Send
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="/Forgot-Password" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="/SignUp" variant="body2">
-                  Don't have an account? Sign Up
-                </Link>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />

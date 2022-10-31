@@ -35,7 +35,7 @@ exports.postUsers = async(req, res = response) => {
         const urlConfirm = `${URL_APP_ECOMMERCE}/confirm/${token}`;
 
         await transporter.sendMail({
-            from: `'Ishoop.com <${EMAIL}>'`,
+            from: `'Ecommerce.com <${EMAIL}>'`,
             to: User.email,
             subject: "Confirmacion de cuenta",
             html: `<p>Por favor confirme su cuenta de Usuario <a href="${urlConfirm}">Confirmar</a></p>`
@@ -156,3 +156,89 @@ exports.loginUserGoogle = async (req, res = response) => {
         res.json('Error: ', error);
     }
 };
+
+exports.forgotPassword = async(req, res=response) =>{
+    try {
+        const email= req.query.email
+
+        const User= await Users.findOne({
+            where:{
+                email: email
+            }
+        });
+
+        if(!User){
+            return res.status(400).json({
+                ok: false,
+                msg: `No existe un usuario con el email ${email}`
+            })
+        };
+
+        const token = await generateJWT(User.id, User.email);
+
+        const urlConfirm = `${process.env.URL_APP_ECOMMERCE_FRONT}/Reset-Password/${token}`
+
+        await transporter.sendMail({
+          from: `'Ecommerce.com <${EMAIL}>'`,
+          to: User.email,
+          subject: "Restablecer cuenta",
+          html: `<p>Para resetear su contraseña haga click aqui <a href="${urlConfirm}">Resetear Contraseña</a></p>`
+        });
+       
+        res.status(200).send({
+            ok: true,
+            msg: 'Por favor revise su email.'
+         });
+
+
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+exports.resetPassword = async( req, res= response) =>{
+    const {token, password}= req.body
+    console.log('body:', req.body)
+    try {
+        const payload = jwt.verify(token,process.env.SECRET_JWT_CODE);
+    
+        if(!payload){
+            return res.status(404).json({
+                ok:false,
+                msg: 'El token ha expirado o es invalido, realice nuevamente el procedimiento.'
+            })
+        };
+        console.log('Payload:', payload);
+
+      const email= payload.email;
+
+        const salt = bcrypt.genSaltSync();
+        const hash = bcrypt.hashSync(password, salt);
+        
+        await Users.update({
+            password: hash,
+        }, {
+            where: {
+                email: email,
+            }
+        });
+    
+        const  User= await Users.findOne({
+            where:{
+                email: email
+            }
+        });
+ 
+     res.json({
+        ok: true,
+        User
+     });
+
+        
+    } catch (error) {
+        res.status(500).json({
+            ok: false,
+            msg: 'Error connecting to the database'
+        })
+    }
+}

@@ -7,7 +7,7 @@ import {Elements, CardElement, useStripe, useElements} from '@stripe/react-strip
 import {loadStripe} from '@stripe/stripe-js';
 import st from './PaymentForm.module.css';
 import accounting from 'accounting';
-import {paymentMessage, emptyCart} from '../../../actions/index';
+import {paymentMessage, startEmtyCart} from '../../../actions/index';
 // import {useStateValue} from '../../../StateProvider';
 
 
@@ -17,7 +17,6 @@ function PaymentForm({backStep, nextStep}) {
   const prices = useSelector(state => state.ShoppingCart?.map((e => e.price)));
   const Total = prices?.reduce((e, i) => e + i, 0);
   const message = useSelector(state => state.PaymentMessage);
-  console.log('message:',message)
 
   const dispatch = useDispatch();
 
@@ -40,7 +39,7 @@ function PaymentForm({backStep, nextStep}) {
         await elements.getElement(CardElement).clear();
         nextStep();
         if(message === 'Successful Payment'){
-          dispatch(emptyCart([]));//QUEDA PENDIENTE SOLUCIONAR.
+          dispatch(startEmtyCart());//QUEDA PENDIENTE SOLUCIONAR.
         }
       } catch (error) {
         console.log('error:', error);

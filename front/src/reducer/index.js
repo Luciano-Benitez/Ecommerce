@@ -26,7 +26,7 @@ const reducer = (state = initialState, {type, payload}) => {
         case EMPTY_CART:
             return {
                 ...state,
-                ShoppingCart: payload
+                ShoppingCart: [],
             };
         
         case LOGIN_USER:

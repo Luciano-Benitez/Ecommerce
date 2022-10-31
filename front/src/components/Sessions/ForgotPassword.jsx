@@ -1,19 +1,16 @@
 import React from 'react';
 import {useDispatch} from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import LockResetIcon from '@mui/icons-material/LockReset';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import {loginUser} from '../../actions/index';
-import st from './SignIn.module.css';
+import st from './ForgotPassword.module.css';
+import Swl from 'sweetalert2';
+import {startRestorePassword} from '../../actions/index';
 
 function Copyright(props) {
   return (
@@ -28,13 +25,11 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignIn () {
+export default function ForgotPassword () {
 
   const dispatch = useDispatch();
-  const history = useNavigate();
   const [state, setState] = React.useState({
-    email:'',
-    password:''
+    email:''
   });
 
   const onChange = (e) => {
@@ -46,14 +41,13 @@ export default function SignIn () {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(loginUser(state.email, state.password));
-    setState({email:'', password:''});
-    history('/');
+    dispatch(startRestorePassword(state.email));
+    setState({email:''});
   };
 
   return (
     <ThemeProvider theme={theme}  >
-      <Container component="main" maxWidth="xs" className={st.b1} >
+      <Container component="main" className={st.b1} >
         <CssBaseline />
         <Box
           sx={{
@@ -63,11 +57,9 @@ export default function SignIn () {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
+        <LockResetIcon fontSize='large' color='primary' />
           <Typography component="h1" variant="h5">
-            Sign in
+            Forgot Password
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
@@ -83,39 +75,15 @@ export default function SignIn () {
               autoComplete="email"
               autoFocus
             />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="password"
-              name="password"
-              label="Password"
-              type="password"
-              value={state.password}
-              onChange={onChange}
-              autoComplete="current-password"
-            />
             <Button
               type="submit"
-              disabled={!state.email || !state.password}
+              disabled={!state.email}
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
               Login
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="/Forgot-Password" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="/SignUp" variant="body2">
-                  Don't have an account? Sign Up
-                </Link>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />

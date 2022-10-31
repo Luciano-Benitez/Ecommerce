@@ -37,7 +37,6 @@ export default function SignUp() {
         img: "",
         isVerified: false
     });
-    console.log('state:', state);
 
     const handleChange = (e) => {
         setState({

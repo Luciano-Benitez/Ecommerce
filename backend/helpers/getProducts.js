@@ -11,7 +11,7 @@ exports.getProducts = () => {
                     productType: element.productType,
                     price: element.price,
                     rating: element.rating,
-                    image: [element.image[0]],
+                    image: [element.image],
                     description: element.description
                 }
             });
