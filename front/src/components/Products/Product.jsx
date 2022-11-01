@@ -61,11 +61,7 @@ function Product({product: {id, name, productType, image, price, rating, descrip
             <p>&#11088;</p>
           ))}
         </IconButton>
-        <IconButton
-            onClick={handleExpandClick}
-            aria-expanded={expanded}
-            aria-label="show more"
-        >
+        <IconButton onClick={handleExpandClick} aria-expanded={expanded} aria-label="show more">
           <ExpandMoreIcon/>
         </IconButton>
       </CardActions>

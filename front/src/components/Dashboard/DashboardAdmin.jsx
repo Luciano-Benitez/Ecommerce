@@ -1,23 +1,24 @@
 import React from 'react';
-import { styled, useTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
 import IconButton from '@mui/material/IconButton';
 import Avatar from '@mui/material/Avatar'
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import st from './DashboardUser.module.css';
+import Collapse from '@mui/material/Collapse';
+import st from './DashboardAdmin.module.css';
 
 const drawerWidth = 240;
 
@@ -47,7 +48,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   alignItems: 'center',
   justifyContent: 'flex-end',
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
   ...theme.mixins.toolbar,
 }));
 
@@ -86,92 +86,75 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-export default function MiniDrawer() {
-  const theme = useTheme();
+export default function DashboardAdmin() {
   const [open, setOpen] = React.useState(false);
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
+  const handleMenu = () => {
+    setOpen(!open);
   };
 
-  const handleDrawerClose = () => {
-    setOpen(false);
+  const [profile, setProfile] = React.useState(false);
+  const handleProfile = () => {
+    setProfile(!profile)
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box>
       <AppBar position="fixed" open={open}>
         <Toolbar sx={{display: 'flex', justifyContent:'space-between'}} >
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{
-              
+          <IconButton color="inherit" aria-label="open drawer" onClick={handleMenu} edge="start" sx={{
               ...(open && { display: 'none' }),
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Dashboard
-          </Typography>
-          <IconButton sx={{marginRight:'2%'}} >
-            <Avatar/>
-          </IconButton>
+            }}><MenuIcon/></IconButton>
+          <Typography variant="h6" noWrap component="div">Dashboard</Typography>
+          <IconButton sx={{marginRight:'2rem'}} onClick={handleProfile} aria-expanded={profile}  >
+              <Avatar/>
+            </IconButton>
         </Toolbar>
       </AppBar>
       
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}><ChevronLeftIcon /></IconButton>
+          <IconButton onClick={handleMenu}><ChevronLeftIcon/></IconButton>
         </DrawerHeader>
-        <Divider />
+        <Divider/>
         <List>
-          {['Notificaciones', 'Productos', 'Ventas', 'Otros'].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                  }}
-                >
+          {['Notificaciones', 'Productos', 'Ventas', 'Otros'].map((texto, index) => (
+            <ListItem key={texto} disablePadding sx={{ display: 'block' }}>
+              <ListItemButton sx={{minHeight: 48, justifyContent: open ? 'initial' : 'center', px: 2.5}}>
+                <ListItemIcon sx={{minWidth: 0, mr: open ? 3 : 'auto', justifyContent: 'center'}}>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                 </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                <ListItemText primary={texto} sx={{ opacity: open ? 1 : 0 }}/>
               </ListItemButton>
             </ListItem>
           ))}
         </List>
-        <Divider />
+        <Divider/>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <DrawerHeader />
-        <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
-          enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
-          imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus.
-          Convallis convallis tellus id interdum velit laoreet id donec ultrices.
-          Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-          adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra
-          nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum
-          leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis
-          feugiat vivamus at augue. At augue eget arcu dictum varius duis at
-          consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
-          sapien faucibus et molestie ac.
-        </Typography>
-       
+      <Box component="main" sx={{padding:'5rem'}} >
+        
+        <Box sx={{display:'grid', justifyContent:'center', float:'right',
+                  marginRight:'-5rem', marginTop:'-2rem'}} >
+          <Collapse  in={profile} orientation='vertical' unmountOnExit timeout='auto' >
+            <List >
+              <ListItem disablePadding >
+                <ListItemButton>
+                  <ListItemIcon><InboxIcon/></ListItemIcon>
+                  <ListItemText primary="Configuracion" />
+                </ListItemButton>
+              </ListItem>
+              <Divider/>
+              <ListItem disablePadding >
+                <ListItemButton>
+                  <ListItemIcon><InboxIcon/></ListItemIcon>
+                  <ListItemText primary="Cerrar Sesión" />
+                </ListItemButton>
+              </ListItem>
+            </List> 
+          </Collapse>
+        </Box> 
+          
+        
       </Box>
     </Box>
   );
-}
+};

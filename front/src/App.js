@@ -9,7 +9,7 @@ import ConfirmAccount from './components/Sessions/ConfirmAccount';
 import CheckOut from './components/CheckoutForm/Checkout/CheckOut';
 import ForgotPassword from './components/Sessions/ForgotPassword';
 import ResetPassword from './components/Sessions/ResetPassword';
-import DashboardUser from './components/Dashboard/DashboardUser';
+import DashboardAdmin from './components/Dashboard/DashboardAdmin';
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
         <Route exact path="/Reset-Password/:token" element={<><NavBar/><ResetPassword/></>}/>
         <Route exact path="/CheckoutPage" element={<><NavBar/><CheckoutPage/></>}/>
         <Route exact path="/CheckOut" element={<><NavBar/><CheckOut/></>}/>
-        <Route exact path="/DashboardUser" element={<DashboardUser/>}/>
+        <Route exact path="/DashboardAdmin" element={<DashboardAdmin/>}/>
       </Routes>
     </BrowserRouter> 
   );
