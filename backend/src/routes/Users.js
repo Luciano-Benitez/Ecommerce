@@ -8,13 +8,18 @@ const {loginUsers} = require('../controllers/Users');
 const {loginUserGoogle} = require('../controllers/Users');
 const {forgotPassword} = require('../controllers/Users');
 const {resetPassword} = require('../controllers/Users');
+const {postAdmin} = require('../controllers/Users');
+const {loginAdmin} = require('../controllers/Users');
 
-router.post('/postUser', postUsers);
 router.get('/getUser', getUsers);
-router.get('/confirm/:token', confirmAccount);
+router.post('/postUser', postUsers);
 router.post('/login', loginUsers);
+router.get('/confirm/:token', confirmAccount);
 router.post('/loginUserGoogle', loginUserGoogle);
 router.get('/forgotpassword', forgotPassword);
 router.put('/resetpassword', resetPassword);
+router.post('/postAdmin', postAdmin);
+router.post('/loginAdmin', loginAdmin);
+
 
 module.exports = router;

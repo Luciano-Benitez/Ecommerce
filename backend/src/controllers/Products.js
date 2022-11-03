@@ -1,4 +1,4 @@
-const {Products, Categories, Stores} = require('../db');
+const {Products, Categories} = require('../db');
 
 exports.postCategories = async(req, res) => {
     try {
@@ -54,6 +54,25 @@ exports.getProducts = async(req, res) => {
         allProducts !== undefined ?
         res.status(200).send(allProducts) :
         res.status(404).json('El producto que busca no se Encuentra en la DB.')
+    } catch (error) {
+        console.log(error);
+        res.json('Error en el Catch.');
+    }
+};
+exports.getProductsForAdmin = async(req, res) => {
+    try {
+        const {id} = req.body;
+        console.log("idBack:", id)
+        const allProducts = await Products.findAll({
+            attributes: {
+                exclude: ["createdAt", "updatedAt"],
+              },
+              where: {
+                userId: id
+              }
+        });
+        allProducts.length &&
+        res.status(200).send(allProducts) 
     } catch (error) {
         console.log(error);
         res.json('Error en el Catch.');

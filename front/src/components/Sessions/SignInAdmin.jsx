@@ -12,7 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import {loginUser} from '../../actions/index';
+import {loginAdmin} from '../../actions/index';
 import st from './SignIn.module.css';
 
 function Copyright(props) {
@@ -28,8 +28,9 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignIn () {
+export default function SignInAdmin () {
   const User = useSelector(state => state.User);
+  console.log('User:', User)
   const dispatch = useDispatch();
   const history = useNavigate();
   const [state, setState] = React.useState({
@@ -46,10 +47,13 @@ export default function SignIn () {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(loginUser(state.email, state.password));
+    dispatch(loginAdmin(state.email, state.password), history('/DashboardAdmin'));
     setState({email:'', password:''});
+    // {User.length === 0 && history('/SignIn-Admin')}
+    // history('/DashboardAdmin')
     history('/')
   };
+  
 
   return (
     <ThemeProvider theme={theme}  >
@@ -67,7 +71,7 @@ export default function SignIn () {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Sign in Admin
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
@@ -111,7 +115,7 @@ export default function SignIn () {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/SignUp" variant="body2">
+                <Link href="/SignUp-Admin" variant="body2">
                   Don't have an account? Sign Up
                 </Link>
               </Grid>

@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {useDispatch} from 'react-redux'
-import {postUser, uploadImageCloud} from '../../actions/index';
+import {postAdmin, uploadImageCloud} from '../../actions/index';
 
 
 function Copyright(props) {
@@ -24,7 +24,7 @@ function Copyright(props) {
     );
   };
 
-export default function SignUp() {
+export default function SignUpAdmin() {
     const theme = createTheme();
     const dispatch = useDispatch();
     const history = useNavigate();
@@ -32,7 +32,7 @@ export default function SignUp() {
     const [state, setState] = React.useState({
         name:'',
         email:'',
-        role:'User',
+        role:'Admin',
         password: '',
         img: "",
         isVerified: false
@@ -60,7 +60,7 @@ export default function SignUp() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(postUser(state));
+        dispatch(postAdmin(state));
         alert(`¡Cuenta creada con exito!. Por favor confirme su cuenta a travez de su correo ${state.email}`);
         setState({name: '', email: '', password: '', img:''});
         history('/');
@@ -81,7 +81,7 @@ export default function SignUp() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            Sign up as Admin
           </Typography>
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
@@ -122,7 +122,6 @@ export default function SignUp() {
                   type="file"
                   name="file"
                   id="file"
-                  // label="File"
                   onChange={uploadImage}
                   fullWidth
                 />
@@ -134,7 +133,7 @@ export default function SignUp() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign Up
+              Sign Up 
             </Button>
           </Box>
         </Box>

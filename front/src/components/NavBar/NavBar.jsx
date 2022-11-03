@@ -22,29 +22,32 @@ export default function NavBar() {
   
   const cartLength = useSelector(state => state.ShoppingCart?.length);
   const nameUser = useSelector(state => state.User.name);
-  const userOn = useSelector(state => state.User);
+  const UserOn = useSelector(state => state.User);
 
   const Logout = () => { //Funcion de Cerrar Sesion.
     dispatch(startLogout());
+  };
+
+  const goDashboard = (e) => {
+    e.preventDefault();
+    {UserOn.length === 0 || UserOn.role === 'User'? History('/'): History('/DashboardAdmin')}
   };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar  position="fixed" color='default' > 
         <Toolbar> 
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 5 }}
-          >
+          <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 5 }}>
             <Link to='/' ><HomeIcon fontSize='large' /></Link>
           </IconButton>
-          <Typography textAlign='center' variant="h5" component="div" sx={{ flexGrow: 1 }}>
-            {nameUser?'¡Bienvenido '+ nameUser + '!' : 'www.ecommerce.com'}
+          {UserOn.length === 0 ?
+          <Button component={Link} to='/SignIn-Admin' variant='outlined'><strong>Sign in as Admin</strong></Button> :
+          <Button onClick={goDashboard} variant='outlined'><strong>Dashboard</strong></Button> 
+          }
+          <Typography textAlign='center' variant='h5' component="div" sx={{ flexGrow: 1, marginRight:'10%' }}>
+              {nameUser?'¡Bienvenido '+ nameUser + '!' : 'www.ecommerce.com'}
           </Typography>
-          {userOn.length === 0 ?
+          {UserOn.length === 0 ?
             <Button component={Link} to='/SignIn' variant='outlined'><strong>Sign in</strong></Button> :
             <Button variant='outlined' onClick={Logout} ><strong>Sign Out</strong></Button>
           }

@@ -1,24 +1,33 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
+import { useSelector, useDispatch} from 'react-redux';
+import { useNavigate, Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-import Avatar from '@mui/material/Avatar'
+import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import HomeIcon from '@mui/icons-material/Home';
+import MarkEmailUnreadIcon from '@mui/icons-material/MarkEmailUnread';
+import AutoAwesomeMotionIcon from '@mui/icons-material/AutoAwesomeMotion';
+import SettingsIcon from '@mui/icons-material/Settings';
+import LogoutIcon from '@mui/icons-material/Logout';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import Collapse from '@mui/material/Collapse';
+import Card from '@mui/material/Card';
 import st from './DashboardAdmin.module.css';
+import {getProductsAdmin, startLogout} from'../../actions/index';
+import Setting from './Setting/Setting';
+import { Container } from '@mui/system';
 
 const drawerWidth = 240;
 
@@ -87,73 +96,110 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function DashboardAdmin() {
-  const [open, setOpen] = React.useState(false);
-  const handleMenu = () => {
-    setOpen(!open);
-  };
+
+  const History = useNavigate();
+  const dispatch = useDispatch();
+
+  const id = useSelector(state => state.User.id);
+  const fullName = useSelector(state => state.User.name);
+  const Profile = useSelector(state => state.User.Profile);
 
   const [profile, setProfile] = React.useState(false);
   const handleProfile = () => {
-    setProfile(!profile)
+    setProfile(!profile);
+    {openMenu === true && setOpenMenu(!openMenu)}
+    {openSetting === true && setOpenSetting(!openSetting)}
+  };
+
+  const [openSetting, setOpenSetting] = React.useState(false);
+  const OpenSetting = () => {
+    setOpenSetting(!openSetting);
+  };
+
+  const offSesion = () => {
+    dispatch(startLogout())
+    History('/')
+  };
+
+  const [openMenu, setOpenMenu] = React.useState(false);
+  const handleMenu = () => {
+    setOpenMenu(!openMenu);
+    {profile === true && setProfile(!profile)}
+    {openSetting === true && setOpenSetting(!openSetting)}
+  };
+
+  const getProducts = (e) => {
+    e.preventDefault();
+    dispatch(getProductsAdmin(id));
+  };
+
+  const goHome = (e) => {
+    e.preventDefault();
+    History('/')
   };
 
   return (
     <Box>
-      <AppBar position="fixed" open={open}>
+      <AppBar position="fixed" open={openMenu}>
         <Toolbar sx={{display: 'flex', justifyContent:'space-between'}} >
           <IconButton color="inherit" aria-label="open drawer" onClick={handleMenu} edge="start" sx={{
-              ...(open && { display: 'none' }),
+              ...(openMenu && { display: 'none' }),
             }}><MenuIcon/></IconButton>
-          <Typography variant="h6" noWrap component="div">Dashboard</Typography>
+          <Typography variant="h6" noWrap component="div">{`${fullName}`}</Typography>
           <IconButton sx={{marginRight:'2rem'}} onClick={handleProfile} aria-expanded={profile}  >
-              <Avatar/>
-            </IconButton>
+            <Avatar src={Profile} sx={{ width: 45, height: 45 }} />
+          </IconButton>
         </Toolbar>
       </AppBar>
       
-      <Drawer variant="permanent" open={open}>
+      <Drawer variant="permanent" open={openMenu}>
         <DrawerHeader>
           <IconButton onClick={handleMenu}><ChevronLeftIcon/></IconButton>
         </DrawerHeader>
         <Divider/>
         <List>
-          {['Notificaciones', 'Productos', 'Ventas', 'Otros'].map((texto, index) => (
-            <ListItem key={texto} disablePadding sx={{ display: 'block' }}>
-              <ListItemButton sx={{minHeight: 48, justifyContent: open ? 'initial' : 'center', px: 2.5}}>
-                <ListItemIcon sx={{minWidth: 0, mr: open ? 3 : 'auto', justifyContent: 'center'}}>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={texto} sx={{ opacity: open ? 1 : 0 }}/>
-              </ListItemButton>
-            </ListItem>
-          ))}
+            <ListItemButton onClick={null} >
+              <ListItemIcon><MarkEmailUnreadIcon/></ListItemIcon>
+              <ListItemText primary="Notificaciones" />
+            </ListItemButton>
+            <ListItemButton onClick={null} >
+              <ListItemIcon><AutoAwesomeMotionIcon/></ListItemIcon>
+              <ListItemText primary="Ver Productos" />
+            </ListItemButton>
+            <ListItemButton onClick={goHome} >
+              <ListItemIcon><HomeIcon/></ListItemIcon>
+              <ListItemText primary="Volver a Inicio" />
+            </ListItemButton>
         </List>
         <Divider/>
       </Drawer>
       <Box component="main" sx={{padding:'5rem'}} >
-        
         <Box sx={{display:'grid', justifyContent:'center', float:'right',
                   marginRight:'-5rem', marginTop:'-2rem'}} >
           <Collapse  in={profile} orientation='vertical' unmountOnExit timeout='auto' >
+          
             <List >
               <ListItem disablePadding >
-                <ListItemButton>
-                  <ListItemIcon><InboxIcon/></ListItemIcon>
+                <ListItemButton onClick={OpenSetting} >
+                  <ListItemIcon><SettingsIcon/></ListItemIcon>
                   <ListItemText primary="Configuracion" />
                 </ListItemButton>
               </ListItem>
               <Divider/>
               <ListItem disablePadding >
-                <ListItemButton>
-                  <ListItemIcon><InboxIcon/></ListItemIcon>
+                <ListItemButton onClick={offSesion} >
+                  <ListItemIcon><LogoutIcon/></ListItemIcon>
                   <ListItemText primary="Cerrar Sesión" />
                 </ListItemButton>
               </ListItem>
             </List> 
           </Collapse>
         </Box> 
-          
-        
+        <Container>
+          <Collapse in={openSetting} unmountOnExit sx={{display:'flex'}} >
+            <Setting/>
+          </Collapse>     
+        </Container>
       </Box>
     </Box>
   );

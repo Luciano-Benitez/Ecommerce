@@ -1,8 +1,10 @@
 import {ADD_TO_CART, REMOVE_CART, LOGIN_USER, LOGOUT, SHIPPING_DATA,
-        SET_PAYMENT_MESSAGE, EMPTY_CART, GET_PRODUCTS} from './types';
+        SET_PAYMENT_MESSAGE, EMPTY_CART, GET_PRODUCTS, LOGIN_ADMIN,
+        GET_PRODUCTS_ADMIN} from './types';
 
 import {fetchLogin, fetchRestorePassword, fetchResetPassword} from '../helpers/search-backend';
 import {cloudynary} from '../helpers/Cloudinary';
+import { useSelector } from 'react-redux';
 import Swl from 'sweetalert2';
 import axios from 'axios';
 
@@ -42,6 +44,12 @@ export function postUser(payload){
         return resultPost
     }
 };
+export function postAdmin(payload){
+    return async function() {
+        const resultPost = await axios.post('http://localhost:3001/postAdmin', payload);
+        return resultPost
+    }
+};
 
 export const loguin = (user) => ({
     type: LOGIN_USER,
@@ -52,9 +60,29 @@ export const loginUser = (email, password) => {
     return async (dispatch) => {
         const data = await fetchLogin('login',{email, password}, 'POST');
         const body = await data.json();
-        if(body.isVerified){
+        if(body.isVerified && body.role === 'User'){
             localStorage.setItem('token: ', body.token);
             dispatch(loguin({id: body.id, email: body.email, name: body.name, role: body.role}))
+        } else {
+            Swl.fire(`${body.msg}`);
+        }
+    }
+};
+
+export const loguinAdm = (admin) => ({
+    type: LOGIN_ADMIN,
+    payload: admin
+});
+
+export const loginAdmin = (email, password) => {
+    return async (dispatch) => {
+       
+        const data = await fetchLogin('loginAdmin',{email, password}, 'POST');
+        const body = await data.json();
+        if(!body.msg){
+            localStorage.setItem('token: ', body.token);
+            dispatch(loguinAdm({id: body.id, email: body.email, name: body.name, role: body.role,
+                            Profile: body.profile}));
         } else {
             Swl.fire(`${body.msg}`);
         }
@@ -123,6 +151,19 @@ export const uploadImageCloud = (formData) => {
       const body = await resp.data.secure_url;
       return body;
     };
+};
+
+export const getProductsAdmin = (id) => {
+    return async function(dispatch){
+        // const idAdm = useSelector(state => state.User.id);
+        const result = await axios.get('http://localhost:3001/getProductsForAdm/',{id});
+        console.log('result:', result);
+        const allProducts = result.data;
+        return dispatch({
+            type: GET_PRODUCTS_ADMIN,
+            payload: allProducts
+        })
+    }
 };
 
 

@@ -12,7 +12,8 @@ exports.getProducts = () => {
                     price: element.price,
                     rating: element.rating,
                     image: [element.image],
-                    description: element.description
+                    description: element.description,
+                    userId: element.userId
                 }
             });
         });

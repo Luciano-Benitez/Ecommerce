@@ -15,9 +15,7 @@ import st from '../Products/product.module.css';
 import {Cart} from '../../actions/index';
 // import {Zapas} from './img/Zapas.jpg';
 
-function Product({product: {id, name, productType, image, price, rating, description}}) {
-  console.log('image:', image)
-    
+function Product({product: {id, name, productType, image, price, rating, description}}) {    
     const dispatch = useDispatch();
     const [cart] = React.useState({id, name, productType, image, price, rating, description});
     const [expanded, setExpanded] = React.useState(false);
@@ -61,7 +59,7 @@ function Product({product: {id, name, productType, image, price, rating, descrip
             <p>&#11088;</p>
           ))}
         </IconButton>
-        <IconButton onClick={handleExpandClick} aria-expanded={expanded} aria-label="show more">
+        <IconButton sx={{padding:'1rem'}} onClick={handleExpandClick} aria-expanded={expanded} aria-label="show more">
           <ExpandMoreIcon/>
         </IconButton>
       </CardActions>

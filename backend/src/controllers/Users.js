@@ -100,6 +100,10 @@ exports.loginUsers = async(req, res = response) => {
             return res.status(404).json({msg: 'User or Password is invalid'});
         };
 
+        if(User.role !== 'User'){
+            return res.status(404).json({msg:'Su cuenta no es de Usuario, Por favor ingrese a su cuenta en la seccion de adminsitrador'});
+        }
+
         if(!User.isVerified){
             return res.status(404).json({msg: 'Por favor revise su email y confirme su cuenta.'})
         };
@@ -241,4 +245,78 @@ exports.resetPassword = async( req, res= response) =>{
             msg: 'Error connecting to the database'
         })
     }
-}
+};
+
+exports.postAdmin = async(req, res = response) => {
+    const {name, email, role, password, img, isVerified} = req.body;
+    try {
+        const salt = await bcrypt.genSalt();
+        const hash = await bcrypt.hash(password, salt);
+
+        const User = await Users.create({
+            name, email, role, password: hash, profilePicture: img, isVerified
+        });
+
+        const token = await generateJWT(User.id, User.email);
+        const urlConfirm = `${URL_APP_ECOMMERCE}/confirm/${token}`;
+
+        await transporter.sendMail({
+            from: `'Ecommerce.com <${EMAIL}>'`,
+            to: User.email,
+            subject: "Confirmacion de cuenta",
+            html: `<p>Por favor confirme su cuenta de Usuario <a href="${urlConfirm}">Confirmar</a></p>`
+        });
+        
+        res.status(201).json(User);
+    } catch (error) {
+        res.json('Error: ', error);
+    }
+};
+
+exports.loginAdmin = async(req, res = response) => {
+    try {
+        const {email, password} = req.body;
+        
+        const User = await Users.findOne({
+            where: {
+                email: email
+            }
+        });
+
+        if(!User){
+            return res.status(404).json({
+                msg: 'User or Password is invalid' 
+            })
+        };
+
+
+        const validPassword = await bcrypt.compare(password, User.password);
+
+        if(!validPassword){
+            return res.status(404).json({msg: 'User or Password is invalid'});
+        };
+
+        if(User.role !== 'Admin'){
+            return res.status(404).json({msg:'Su cuenta no es de Administrador, Por favor ingrese a su cuenta en la seccion de Usuario'});
+        }
+
+        if(!User.isVerified){
+            return res.status(404).json({msg: 'Por favor revise su email y confirme su cuenta.'})
+        };
+
+        const token = await generateJWT(User.id, User.email);
+
+        res.status(200).json({
+            id: User.id,
+            email: User.email,
+            name: User.name,
+            profile: User.profilePicture,
+            role: User.role,
+            isVerified: User.isVerified,
+            token
+        });
+
+    } catch (error) {
+        res.json('Error: ', error);
+    }
+};

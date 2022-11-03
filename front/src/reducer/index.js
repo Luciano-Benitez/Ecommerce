@@ -1,10 +1,12 @@
-import {ADD_TO_CART, REMOVE_CART, LOGIN_USER, POST_USER,
-        LOGOUT, SHIPPING_DATA, SET_PAYMENT_MESSAGE, EMPTY_CART,GET_PRODUCTS} from '../actions/types';
+import {ADD_TO_CART, REMOVE_CART, LOGIN_USER, LOGIN_ADMIN, POST_USER, POST_ADMIN,
+        LOGOUT, SHIPPING_DATA, SET_PAYMENT_MESSAGE, EMPTY_CART,GET_PRODUCTS,
+        GET_PRODUCTS_ADMIN} from '../actions/types';
 
 const initialState = {
     allProducts: [],
     ShoppingCart: [],
     User: [],
+    UserProducts: [],
     ShippingData: {},
     PaymentMessage: '',
 };
@@ -35,7 +37,18 @@ const reducer = (state = initialState, {type, payload}) => {
                 User: payload
             };
 
+        case LOGIN_ADMIN:
+            return {
+                ...state,
+                User: payload
+            };
+
         case POST_USER:
+            return {
+                ...state
+            };
+
+        case POST_ADMIN:
             return {
                 ...state
             };
@@ -63,6 +76,12 @@ const reducer = (state = initialState, {type, payload}) => {
             return {
                 ...state,
                 allProducts: payload
+            };
+
+        case GET_PRODUCTS_ADMIN:
+            return {
+                ...state,
+                UserProducts: payload
             };
 
         default:
