@@ -57,9 +57,10 @@ export default function Setting() {
                 <Avatar sx={{display:'flex', width: 150, height: 150,  justifyContent:'center'}}
                         src={Profile} alt='img' elevation={3} >
                 </Avatar>
-                <IconButton color="primary" aria-label="upload picture" component="label">
+                <IconButton sx={{display: 'flex', justifyContent: 'flex-end', marginTop: '-15%'}}
+                   color="primary" aria-label="upload picture" component="label">
                   <input hidden accept="image/*" type="file" />
-                  <PhotoCamera />
+                  <PhotoCamera/>
                 </IconButton>
                   
             </Collapse>
