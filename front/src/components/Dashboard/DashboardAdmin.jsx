@@ -102,7 +102,7 @@ export default function DashboardAdmin() {
 
   const id = useSelector(state => state.User.id);
   const fullName = useSelector(state => state.User.name);
-  const Profile = useSelector(state => state.User.Profile);
+  const profilePicture = useSelector(state => state.User.profilePicture);
 
   const [profile, setProfile] = React.useState(false);
   const handleProfile = () => {
@@ -147,7 +147,7 @@ export default function DashboardAdmin() {
             }}><MenuIcon/></IconButton>
           <Typography variant="h6" noWrap component="div">{`${fullName}`}</Typography>
           <IconButton sx={{marginRight:'2rem'}} onClick={handleProfile} aria-expanded={profile}  >
-            <Avatar src={Profile} sx={{ width: 45, height: 45 }} />
+            <Avatar src={profilePicture} sx={{ width: 45, height: 45 }} />
           </IconButton>
         </Toolbar>
       </AppBar>

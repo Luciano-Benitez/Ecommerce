@@ -10,6 +10,8 @@ const {forgotPassword} = require('../controllers/Users');
 const {resetPassword} = require('../controllers/Users');
 const {postAdmin} = require('../controllers/Users');
 const {loginAdmin} = require('../controllers/Users');
+const {changeProfile} = require('../controllers/Users');
+const {ChangeNameAdm} = require('../controllers/Users');
 
 router.get('/getUser', getUsers);
 router.post('/postUser', postUsers);
@@ -20,6 +22,8 @@ router.get('/forgotpassword', forgotPassword);
 router.put('/resetpassword', resetPassword);
 router.post('/postAdmin', postAdmin);
 router.post('/loginAdmin', loginAdmin);
+router.put('/changeProfile', changeProfile);
+router.put('/changeNameAdm', ChangeNameAdm);
 
 
 module.exports = router;

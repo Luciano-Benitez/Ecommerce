@@ -1,6 +1,6 @@
 import {ADD_TO_CART, REMOVE_CART, LOGIN_USER, LOGOUT, SHIPPING_DATA,
         SET_PAYMENT_MESSAGE, EMPTY_CART, GET_PRODUCTS, LOGIN_ADMIN,
-        GET_PRODUCTS_ADMIN} from './types';
+        GET_PRODUCTS_ADMIN, PUT_PROFILE, PUT_NAME_ADM} from './types';
 
 import {fetchLogin, fetchRestorePassword, fetchResetPassword} from '../helpers/search-backend';
 import {cloudynary} from '../helpers/Cloudinary';
@@ -82,7 +82,7 @@ export const loginAdmin = (email, password) => {
         if(!body.msg){
             localStorage.setItem('token: ', body.token);
             dispatch(loguinAdm({id: body.id, email: body.email, name: body.name, role: body.role,
-                            Profile: body.profile}));
+                            profilePicture: body.profilePicture}));
         } else {
             Swl.fire(`${body.msg}`);
         }
@@ -122,7 +122,6 @@ export const startRestorePassword = (email) => {
 export const resetPassword = (token, password) => {
     return async () => {
       const resp = await fetchResetPassword('resetpassword', {token, password}, 'PUT');
-      console.log('resp:', resp);
       const body = await resp.json();
       if (body.ok) {
         Swl.fire(
@@ -166,5 +165,35 @@ export const getProductsAdmin = (id) => {
     }
 };
 
+export const changeProfileImg = (payload) => {
+    return async function(dispatch){
+        const result = await axios.put('http://localhost:3001/changeProfile', payload);
+        const data = result.data;
+        if(data.ok){
+            dispatch({
+                type:PUT_PROFILE,
+                payload: data.newPerfil
+            });
+            Swl.fire('Imagen de perfil Cambiado con exito.');
+        } else {
+            Swl.fire('Error al Cambiar foto de perfil. Intentelo de nuevo.');
+        }
+    }
+};
 
+export const changeNameAdm = async (payload) => {
+    return async function(dispatch){
+        const result = await axios.put('http://localhost:3001/changeNameAdm', payload);
+        const data = result.data;
+        if(data.ok) {
+            dispatch({
+                type: PUT_NAME_ADM,
+                payload: data.newProfile
+            });
+            Swl.fire('Profile name changed successfully.');
+        }else {
+            Swl.fire('error in successfully changing profile name')
+        };
+    };
+};
   

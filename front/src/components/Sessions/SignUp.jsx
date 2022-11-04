@@ -51,7 +51,6 @@ export default function SignUp() {
         formData.append("upload_preset", "ecommerce-products")
     
         const linkImg = await dispatch(uploadImageCloud(formData));
-        console.log('linkImg:',linkImg);
         setState({
           ...state,
           img: linkImg

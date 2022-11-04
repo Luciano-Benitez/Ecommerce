@@ -310,7 +310,7 @@ exports.loginAdmin = async(req, res = response) => {
             id: User.id,
             email: User.email,
             name: User.name,
-            profile: User.profilePicture,
+            profilePicture: User.profilePicture,
             role: User.role,
             isVerified: User.isVerified,
             token
@@ -318,5 +318,50 @@ exports.loginAdmin = async(req, res = response) => {
 
     } catch (error) {
         res.json('Error: ', error);
+    }
+};
+
+exports.changeProfile = async (req, res = response) => {
+    try {
+        const {id, image} = req.body;
+        const Result = await Users.update({
+            profilePicture: image
+        },
+        {where:
+            {id: id}
+        });
+        const newPerfil = await Users.findOne({
+            where: {id: id}
+        });
+        Result !== undefined ? res.status(200).json({ok:true, newPerfil}) :
+        res.status(404).json({ok:false, msg:'Error en cambiar foto de perfil.'})
+        
+    } catch (error) {
+        console.log('Error:', error) 
+    }
+};
+
+exports.ChangeNameAdm = async (req, res = response) => {
+    try {
+        const {id, name} = req.body;
+        console.log('Body:', req.body);
+        const user = await Users.update({
+            name: name
+        },
+        {
+            where: {id : id}
+        });
+        const newProfile = await Users.findOne({
+            where:{id:id}
+        });
+        console.log('newProfile:', newProfile);
+        user !== undefined ? res.status(200).json({
+            ok:true,
+            newProfile
+        }) : res.status(404).json({ok:false, msg: 'Error al cambiar el nombre, Intentelo de nuevo.'})
+
+    } catch (error) {
+        console.log('Error:', error);
+        res.json(error);
     }
 };
