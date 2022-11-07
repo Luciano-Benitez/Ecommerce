@@ -12,6 +12,7 @@ import ResetPassword from './components/Sessions/ResetPassword';
 import DashboardAdmin from './components/Dashboard/DashboardAdmin';
 import SignInAdmin from './components/Sessions/SignInAdmin';
 import SignUpAdmin from './components/Sessions/SignUpAdmin';
+import EditProduct from './components/Dashboard/Products/EditProduct';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route exact path="/SignUp-Admin" element={<><NavBar/><SignUpAdmin/></>}/>
         <Route exact path="/SignIn-Admin" element={<><NavBar/><SignInAdmin/></>}/>{/* TERMINAR ESTO */}
         <Route exact path="/DashboardAdmin" element={<DashboardAdmin/>}/>
+        <Route exact path="/DashboardAdmin/EditProduct" element={<EditProduct/>}/>
 
         <Route exact path="/ConfirmAccount" element={<><NavBar/><ConfirmAccount/></>}/>
         <Route exact path="/Forgot-Password" element={<><NavBar/><ForgotPassword/></>}/>

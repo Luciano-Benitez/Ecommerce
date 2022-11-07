@@ -1,0 +1,16 @@
+.changeProfileAdm {
+    display:grid;
+    justify-content: center;
+};
+
+.changeNameAdm {
+    display:inline-block;
+    justify-content: center;
+   margin-right: 6rem;
+    width: 25rem
+    
+};
+
+.changePass {
+    padding: 2rem;
+};

@@ -29,8 +29,6 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignInAdmin () {
-  const User = useSelector(state => state.User);
-  console.log('User:', User)
   const dispatch = useDispatch();
   const history = useNavigate();
   const [state, setState] = React.useState({
@@ -49,8 +47,6 @@ export default function SignInAdmin () {
     e.preventDefault();
     dispatch(loginAdmin(state.email, state.password), history('/DashboardAdmin'));
     setState({email:'', password:''});
-    // {User.length === 0 && history('/SignIn-Admin')}
-    // history('/DashboardAdmin')
     history('/')
   };
   

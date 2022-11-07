@@ -313,7 +313,8 @@ exports.loginAdmin = async(req, res = response) => {
             profilePicture: User.profilePicture,
             role: User.role,
             isVerified: User.isVerified,
-            token
+            token: token,
+            password: User.password
         });
 
     } catch (error) {
@@ -344,7 +345,6 @@ exports.changeProfile = async (req, res = response) => {
 exports.ChangeNameAdm = async (req, res = response) => {
     try {
         const {id, name} = req.body;
-        console.log('Body:', req.body);
         const user = await Users.update({
             name: name
         },
@@ -354,7 +354,6 @@ exports.ChangeNameAdm = async (req, res = response) => {
         const newProfile = await Users.findOne({
             where:{id:id}
         });
-        console.log('newProfile:', newProfile);
         user !== undefined ? res.status(200).json({
             ok:true,
             newProfile
@@ -363,5 +362,48 @@ exports.ChangeNameAdm = async (req, res = response) => {
     } catch (error) {
         console.log('Error:', error);
         res.json(error);
+    }
+};
+
+exports.changePasswordAdm = async (req, res = response) => {
+    try {
+        const {id, newPassword} = req.body;
+
+        const User = await Users.findOne({
+            where: {id: id}
+        });
+        // console.log('UserPass:', User.password)
+        if(!User){
+            return res.status(400).json({
+                ok: false,
+                msg: 'User or password is invalid.'
+            });
+        };
+
+        // const validPassword = await bcrypt.compare(oldPassword, newPassword)
+        // console.log('validPassword:',validPassword);
+        // if(!validPassword){
+        //     return res.status(400).json({
+        //         ok: false,
+        //         msg: ' Password is invalid'
+        //     });
+        // };
+
+        const salt = await bcrypt.genSalt();
+        const hash = await bcrypt.hash(newPassword, salt);
+
+        const result = await Users.update({
+            password: hash
+        },
+        {
+            where: {id: id}
+        });
+        const NewUser = await Users.findOne({where:{id: id}});
+
+        result? res.status(200).json({ok: true, NewUser}) :
+        res.status(404).json({ok: false, msg:'Password has not been changed. Please try again.'});
+    } catch (error) {
+        res.status(500).json(error);
+        console.log('Error:', error);   
     }
 };

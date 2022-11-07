@@ -29,7 +29,6 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn () {
-  const User = useSelector(state => state.User);
   const dispatch = useDispatch();
   const history = useNavigate();
   const [state, setState] = React.useState({

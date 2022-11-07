@@ -35,7 +35,6 @@ export default function ResetPassword () {
     password1:'',
     password2:''
   });
-  console.log('state:', state)
 
   const onChange = (e) => {
     setState({

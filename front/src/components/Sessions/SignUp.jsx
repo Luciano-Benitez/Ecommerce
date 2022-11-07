@@ -121,7 +121,6 @@ export default function SignUp() {
                   type="file"
                   name="file"
                   id="file"
-                  // label="File"
                   onChange={uploadImage}
                   fullWidth
                 />

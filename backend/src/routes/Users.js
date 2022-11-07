@@ -12,6 +12,7 @@ const {postAdmin} = require('../controllers/Users');
 const {loginAdmin} = require('../controllers/Users');
 const {changeProfile} = require('../controllers/Users');
 const {ChangeNameAdm} = require('../controllers/Users');
+const {changePasswordAdm} = require('../controllers/Users');
 
 router.get('/getUser', getUsers);
 router.post('/postUser', postUsers);
@@ -24,6 +25,7 @@ router.post('/postAdmin', postAdmin);
 router.post('/loginAdmin', loginAdmin);
 router.put('/changeProfile', changeProfile);
 router.put('/changeNameAdm', ChangeNameAdm);
+router.put('/changePasswordAdm', changePasswordAdm);
 
 
 module.exports = router;

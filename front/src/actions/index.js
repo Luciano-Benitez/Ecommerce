@@ -1,10 +1,9 @@
 import {ADD_TO_CART, REMOVE_CART, LOGIN_USER, LOGOUT, SHIPPING_DATA,
         SET_PAYMENT_MESSAGE, EMPTY_CART, GET_PRODUCTS, LOGIN_ADMIN,
-        GET_PRODUCTS_ADMIN, PUT_PROFILE, PUT_NAME_ADM} from './types';
+        GET_PRODUCTS_ADMIN, PUT_PROFILE, PUT_NAME_ADM, PUT_PASSWORD_ADM} from './types';
 
 import {fetchLogin, fetchRestorePassword, fetchResetPassword} from '../helpers/search-backend';
 import {cloudynary} from '../helpers/Cloudinary';
-import { useSelector } from 'react-redux';
 import Swl from 'sweetalert2';
 import axios from 'axios';
 
@@ -62,7 +61,7 @@ export const loginUser = (email, password) => {
         const body = await data.json();
         if(body.isVerified && body.role === 'User'){
             localStorage.setItem('token: ', body.token);
-            dispatch(loguin({id: body.id, email: body.email, name: body.name, role: body.role}))
+            dispatch(loguin({id: body.id, email: body.email, name: body.name, role: body.role, token: body.token}))
         } else {
             Swl.fire(`${body.msg}`);
         }
@@ -82,7 +81,8 @@ export const loginAdmin = (email, password) => {
         if(!body.msg){
             localStorage.setItem('token: ', body.token);
             dispatch(loguinAdm({id: body.id, email: body.email, name: body.name, role: body.role,
-                            profilePicture: body.profilePicture}));
+                    profilePicture: body.profilePicture, token: body.token,
+                    password: body.password}));
         } else {
             Swl.fire(`${body.msg}`);
         }
@@ -154,15 +154,13 @@ export const uploadImageCloud = (formData) => {
 
 export const getProductsAdmin = (id) => {
     return async function(dispatch){
-        // const idAdm = useSelector(state => state.User.id);
-        const result = await axios.get('http://localhost:3001/getProductsForAdm/',{id});
-        console.log('result:', result);
+        const result = await axios (`http://localhost:3001/getProductsForAdm/${id}`);
         const allProducts = result.data;
         return dispatch({
             type: GET_PRODUCTS_ADMIN,
             payload: allProducts
         })
-    }
+    };
 };
 
 export const changeProfileImg = (payload) => {
@@ -181,7 +179,7 @@ export const changeProfileImg = (payload) => {
     }
 };
 
-export const changeNameAdm = async (payload) => {
+export const changeNameAdm = (payload) => {
     return async function(dispatch){
         const result = await axios.put('http://localhost:3001/changeNameAdm', payload);
         const data = result.data;
@@ -197,3 +195,18 @@ export const changeNameAdm = async (payload) => {
     };
 };
   
+export const changePasswordAdm = (payload) => {
+    return async (dispatch) => {
+        const result = await axios.put('http://localhost:3001/changePasswordAdm', payload);
+        const data = result.data;
+        if(data.ok){    
+            dispatch({
+                type: PUT_PASSWORD_ADM,
+                payload: data.NewUser
+            });
+            Swl.fire('Password changed successfully.');
+        } else {
+            Swl.fire('Password change error.');
+        }
+    };
+};

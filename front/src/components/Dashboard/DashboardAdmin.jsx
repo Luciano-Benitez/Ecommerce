@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { styled } from '@mui/material/styles';
 import { useSelector, useDispatch} from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
@@ -13,7 +13,7 @@ import Divider from '@mui/material/Divider';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import HomeIcon from '@mui/icons-material/Home';
-import MarkEmailUnreadIcon from '@mui/icons-material/MarkEmailUnread';
+import ReplyAllIcon from '@mui/icons-material/ReplyAll';
 import AutoAwesomeMotionIcon from '@mui/icons-material/AutoAwesomeMotion';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -28,6 +28,7 @@ import st from './DashboardAdmin.module.css';
 import {getProductsAdmin, startLogout} from'../../actions/index';
 import Setting from './Setting/Setting';
 import { Container } from '@mui/system';
+import Products from './Products/Products';
 
 const drawerWidth = 240;
 
@@ -96,47 +97,61 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function DashboardAdmin() {
-
   const History = useNavigate();
   const dispatch = useDispatch();
 
-  const id = useSelector(state => state.User.id);
+  const idUser = useSelector(state => state.User.id);
   const fullName = useSelector(state => state.User.name);
   const profilePicture = useSelector(state => state.User.profilePicture);
 
-  const [profile, setProfile] = React.useState(false);
-  const handleProfile = () => {
+  const [profile, setProfile] = React.useState(false); 
+  const handleProfile = () => { //Open/Close the profile.
     setProfile(!profile);
     {openMenu === true && setOpenMenu(!openMenu)}
     {openSetting === true && setOpenSetting(!openSetting)}
   };
 
   const [openSetting, setOpenSetting] = React.useState(false);
-  const OpenSetting = () => {
+  const OpenSetting = () => {  //Open/Close Setting.
+    {openProducts === true && setOpenProducts(!openProducts)}
     setOpenSetting(!openSetting);
   };
 
-  const offSesion = () => {
+  const offSesion = () => {//Function for off Sesion.
     dispatch(startLogout())
     History('/')
   };
 
   const [openMenu, setOpenMenu] = React.useState(false);
-  const handleMenu = () => {
+  const handleMenu = () => {  //Open/Close the menu.
     setOpenMenu(!openMenu);
     {profile === true && setProfile(!profile)}
     {openSetting === true && setOpenSetting(!openSetting)}
   };
 
-  const getProducts = (e) => {
-    e.preventDefault();
-    dispatch(getProductsAdmin(id));
+  const goStart = () => {
+    {profile === true && setProfile(!profile)}
+    {openSetting === true && setOpenSetting(!openSetting)}
+    {openMenu === true && setOpenMenu(!openMenu)}
+    {openProducts === true && setOpenProducts(!openProducts)}
   };
 
-  const goHome = (e) => {
+  const [openProducts, setOpenProducts] = React.useState(false);
+  const openAllProducts = () => {  //Open/Close allProducts the Dashboard.
+    {profile === true && setProfile(!profile)}
+    {openMenu === true && setOpenMenu(!openMenu)}
+    {openSetting === true && setOpenSetting(!openSetting)}
+    {openProducts === false && setOpenProducts(!openProducts)}
+  };
+  const goHome = (e) => {  //Function for redirect to Home.
     e.preventDefault();
     History('/')
   };
+
+  const [id, setId] = React.useState(idUser);
+  useEffect(() => {  //Render all admin products in the global state.
+    dispatch(getProductsAdmin(id));
+  }, [dispatch, id]); 
 
   return (
     <Box>
@@ -158,16 +173,16 @@ export default function DashboardAdmin() {
         </DrawerHeader>
         <Divider/>
         <List>
-            <ListItemButton onClick={null} >
-              <ListItemIcon><MarkEmailUnreadIcon/></ListItemIcon>
-              <ListItemText primary="Notificaciones" />
+            <ListItemButton onClick={goStart} >
+              <ListItemIcon><HomeIcon/></ListItemIcon>
+              <ListItemText primary="Inicio" />
             </ListItemButton>
-            <ListItemButton onClick={null} >
+            <ListItemButton onClick={openAllProducts} >
               <ListItemIcon><AutoAwesomeMotionIcon/></ListItemIcon>
               <ListItemText primary="Ver Productos" />
             </ListItemButton>
             <ListItemButton onClick={goHome} >
-              <ListItemIcon><HomeIcon/></ListItemIcon>
+              <ListItemIcon><ReplyAllIcon/></ListItemIcon>
               <ListItemText primary="Volver a Inicio" />
             </ListItemButton>
         </List>
@@ -195,10 +210,17 @@ export default function DashboardAdmin() {
             </List> 
           </Collapse>
         </Box> 
+
         <Container>
           <Collapse in={openSetting} unmountOnExit sx={{display:'flex'}} >
             <Setting/>
           </Collapse>     
+        </Container>
+
+        <Container>
+          <Collapse in={openProducts} unmountOnExit >
+              <Products/>
+          </Collapse>
         </Container>
       </Box>
     </Box>

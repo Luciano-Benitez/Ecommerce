@@ -1,5 +1,5 @@
 import React from 'react';
-import {useDispatch} from 'react-redux';
+import {useNavigate} from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -8,28 +8,28 @@ import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import {AddShoppingCart} from '@mui/icons-material/';
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import accounting from 'accounting';
-import st from '../Products/product.module.css';
-import {Cart} from '../../actions/index';
+import st from './Product.module.css';
+
 
 function Product({product: {id, name, productType, image, price, rating, description}}) {    
-    const dispatch = useDispatch();
-    const [cart] = React.useState({id, name, productType, image, price, rating, description});
+    const history = useNavigate();
 
     const [expanded, setExpanded] = React.useState(false);
     const handleExpandClick = () => {
         setExpanded(!expanded)
     };
 
-    const addToCart = () => {  //Envía productos al estado global.
-      dispatch(Cart(cart)); 
+    const goEdit = (e) => {
+      e.preventDefault();
+      history('/DashboardAdmin/EditProduct');
     };
 
   return (
-    <div className={st.root} >
-    <Card >
+    <div className={st.card} >
+    <Card  >
       <CardHeader
         action = {
           <Typography  variant='h5' color='textSecondary' >
@@ -39,7 +39,7 @@ function Product({product: {id, name, productType, image, price, rating, descrip
         title={name}
         subheader='In Stock'
       />
-      <div className={st.img} >
+      <div className={null} >
         <CardMedia 
           src={image}
           title={name}
@@ -50,9 +50,9 @@ function Product({product: {id, name, productType, image, price, rating, descrip
           {productType}
         </Typography>
       </CardContent>
-      <CardActions className={st.cardAct}>
-        <IconButton aria-label="add to cart" onClick={addToCart} >
-          <AddShoppingCart fontSize='large' />
+      <CardActions className={st.cardContent}>
+        <IconButton aria-label="add to cart" onClick={goEdit} >
+          <ModeEditIcon fontSize='large' />
         </IconButton>
         <IconButton>
           {Array(rating).fill().map((_, i) => (
