@@ -23,9 +23,9 @@ function App() {
         <Route exact path="/SignIn" element={<><NavBar/><SignIn/></>}/>
 
         <Route exact path="/SignUp-Admin" element={<><NavBar/><SignUpAdmin/></>}/>
-        <Route exact path="/SignIn-Admin" element={<><NavBar/><SignInAdmin/></>}/>{/* TERMINAR ESTO */}
+        <Route exact path="/SignIn-Admin" element={<><NavBar/><SignInAdmin/></>}/>
         <Route exact path="/DashboardAdmin" element={<DashboardAdmin/>}/>
-        <Route exact path="/DashboardAdmin/EditProduct" element={<EditProduct/>}/>
+        <Route exact path="/DashboardAdmin/EditProduct/:id" element={<EditProduct/>}/>
 
         <Route exact path="/ConfirmAccount" element={<><NavBar/><ConfirmAccount/></>}/>
         <Route exact path="/Forgot-Password" element={<><NavBar/><ForgotPassword/></>}/>

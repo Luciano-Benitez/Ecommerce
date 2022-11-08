@@ -1,6 +1,7 @@
 import {ADD_TO_CART, REMOVE_CART, LOGIN_USER, LOGIN_ADMIN, POST_USER, POST_ADMIN,
         LOGOUT, SHIPPING_DATA, SET_PAYMENT_MESSAGE, EMPTY_CART,GET_PRODUCTS,
-        GET_PRODUCTS_ADMIN, PUT_PROFILE, PUT_NAME_ADM, PUT_PASSWORD_ADM} from '../actions/types';
+        GET_PRODUCTS_ADMIN, PUT_PROFILE, PUT_NAME_ADM, PUT_PASSWORD_ADM,
+        GET_PRODUCT_FOR_ID} from '../actions/types';
 
 const initialState = {
     allProducts: [],
@@ -9,6 +10,7 @@ const initialState = {
     UserProducts: [],
     ShippingData: {},
     PaymentMessage: '',
+    ProductEdit: [],
 };
 
 const reducer = (state = initialState, {type, payload}) => {
@@ -100,7 +102,13 @@ const reducer = (state = initialState, {type, payload}) => {
             return {
                 ...state,
                 User: payload
-            }
+            };
+        
+        case GET_PRODUCT_FOR_ID:
+            return {
+                ...state,
+                ProductEdit: payload
+            };
 
         default:
             return state;

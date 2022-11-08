@@ -1,6 +1,7 @@
 const {Products} = require('../src/db');
 const ProductData = require('../src/Utils/Products');
 
+
 exports.getProducts = () => {
     try {
         ProductData.products.forEach(async (element) => {

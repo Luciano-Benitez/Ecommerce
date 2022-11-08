@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Grid from '@mui/material/Grid';
 import Product from './Product';
 // import st from '../Products/products.module.css';
@@ -7,7 +7,7 @@ import Product from './Product';
 
 const Products = () => {
     const allProducts = useSelector(state => state.UserProducts);
-  const dispatch = useDispatch();
+
   return (
     <div className={null} >
         <Grid container spacing={2}>

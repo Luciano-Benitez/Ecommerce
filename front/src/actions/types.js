@@ -13,3 +13,4 @@ export const GET_PRODUCTS_ADMIN = 'GET_PRODUCTS_ADMIN';
 export const PUT_PROFILE = 'PUT_PROFILE';
 export const PUT_NAME_ADM = 'PUT_NAME_ADM';
 export const PUT_PASSWORD_ADM = 'PUT_PASSWORD_ADM';
+export const GET_PRODUCT_FOR_ID = 'GET_PRODUCT_FOR_ID';

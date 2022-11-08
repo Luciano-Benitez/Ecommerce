@@ -1,0 +1,15 @@
+.Paper {
+    padding: 1rem;
+    margin: 2rem;
+    max-width: 100%;
+};
+
+.Menu {
+    display: grid;
+    /* justify-content: center; */
+};
+
+.label {
+    display: grid;
+    justify-content: inherit;
+};

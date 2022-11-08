@@ -1,5 +1,5 @@
 import React from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, Link} from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -24,7 +24,7 @@ function Product({product: {id, name, productType, image, price, rating, descrip
 
     const goEdit = (e) => {
       e.preventDefault();
-      history('/DashboardAdmin/EditProduct');
+      history(`/DashboardAdmin/EditProduct/` + id);
     };
 
   return (
@@ -51,8 +51,8 @@ function Product({product: {id, name, productType, image, price, rating, descrip
         </Typography>
       </CardContent>
       <CardActions className={st.cardContent}>
-        <IconButton aria-label="add to cart" onClick={goEdit} >
-          <ModeEditIcon fontSize='large' />
+        <IconButton  aria-label="add to cart"  onClick={goEdit}  > 
+            <ModeEditIcon fontSize='medium' />
         </IconButton>
         <IconButton>
           {Array(rating).fill().map((_, i) => (

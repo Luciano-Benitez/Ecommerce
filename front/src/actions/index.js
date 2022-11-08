@@ -1,6 +1,7 @@
 import {ADD_TO_CART, REMOVE_CART, LOGIN_USER, LOGOUT, SHIPPING_DATA,
         SET_PAYMENT_MESSAGE, EMPTY_CART, GET_PRODUCTS, LOGIN_ADMIN,
-        GET_PRODUCTS_ADMIN, PUT_PROFILE, PUT_NAME_ADM, PUT_PASSWORD_ADM} from './types';
+        GET_PRODUCTS_ADMIN, PUT_PROFILE, PUT_NAME_ADM, PUT_PASSWORD_ADM,
+        GET_PRODUCT_FOR_ID} from './types';
 
 import {fetchLogin, fetchRestorePassword, fetchResetPassword} from '../helpers/search-backend';
 import {cloudynary} from '../helpers/Cloudinary';
@@ -208,5 +209,15 @@ export const changePasswordAdm = (payload) => {
         } else {
             Swl.fire('Password change error.');
         }
+    };
+};
+
+export const getProductForID = (id) => {
+    return async (dispatch) => {
+        const result = await axios.get('http://localhost:3001/getProductsForID/' + id);
+        return dispatch({
+            type: GET_PRODUCT_FOR_ID,
+            payload: result.data
+        });
     };
 };

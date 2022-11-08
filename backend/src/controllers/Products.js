@@ -45,3 +45,19 @@ exports.getProductsForAdmin = async(req, res) => {
         res.json('Error en el Catch.');
     }
 };
+
+exports.getProductForID = async (req, res = response) => {
+    try {
+        const {id} = req.params;
+        const result = await Products.findByPk(id.toUpperCase(),{
+            attributes: {
+                exclude: ['createdAt', 'updatedAt']
+            }
+        });
+        result !== undefined ? res.status(200).json(result): 
+        res.status(404).json({msg:'Product search error.'});
+    } catch (error) {
+        res.json(error);
+        console.log('Error:', error);
+    }
+};

@@ -148,7 +148,7 @@ export default function DashboardAdmin() {
     History('/')
   };
 
-  const [id, setId] = React.useState(idUser);
+  const [id] = React.useState(idUser);
   useEffect(() => {  //Render all admin products in the global state.
     dispatch(getProductsAdmin(id));
   }, [dispatch, id]); 
