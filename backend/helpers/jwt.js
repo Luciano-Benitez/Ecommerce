@@ -8,6 +8,7 @@ async function generateJWT (id, email) {
 
     } catch (error) {
         resizeBy.json('Error en el Catch.');
-    }
+    };
 };
+
 module.exports = {generateJWT};

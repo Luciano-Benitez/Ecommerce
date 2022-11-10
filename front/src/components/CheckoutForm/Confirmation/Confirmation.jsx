@@ -9,7 +9,7 @@ const Confirmation = ({message}) => {
     <Divider/>
     <Button padding='1rem' component={Link} to='/' variant='outlined' type='button' >Back to home page</Button>
     </>
-  )
+  );
 };
 
 export default Confirmation;

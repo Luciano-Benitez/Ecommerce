@@ -2,8 +2,6 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Grid from '@mui/material/Grid';
 import Product from './Product';
-// import st from '../Products/products.module.css';
-
 
 const Products = () => {
     const allProducts = useSelector(state => state.UserProducts);

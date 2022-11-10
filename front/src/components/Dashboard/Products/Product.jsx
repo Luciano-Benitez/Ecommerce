@@ -16,7 +16,6 @@ import st from './Product.module.css';
 
 function Product({product: {id, name, productType, image, price, rating, description}}) {    
     const history = useNavigate();
-
     const [expanded, setExpanded] = React.useState(false);
     const handleExpandClick = () => {
         setExpanded(!expanded)
@@ -39,12 +38,10 @@ function Product({product: {id, name, productType, image, price, rating, descrip
         title={name}
         subheader='In Stock'
       />
-      <div className={null} >
-        <CardMedia 
-          src={image}
+        <CardMedia sx={{display:'flex', justifyContent:'center', height:'11rem', borderRadius: '10px'}} /* className={st.image} */
+          image={image[0]}
           title={name}
-        />
-      </div>
+        /> 
       <CardContent>
         <Typography variant="body2" color="text.seconda ry">
           {productType}

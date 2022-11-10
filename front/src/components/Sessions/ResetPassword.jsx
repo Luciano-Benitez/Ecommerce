@@ -21,7 +21,7 @@ function Copyright(props) {
       {'.'}
     </Typography>
   );
-}
+};
 
 const theme = createTheme();
 
@@ -40,7 +40,7 @@ export default function ResetPassword () {
     setState({
       ...state,
       [e.target.name]: e.target.value
-    })
+    });
   };
 
   const handleSubmit = (e) => {
@@ -62,7 +62,7 @@ export default function ResetPassword () {
             alignItems: 'center',
           }}
         >
-            <PasswordIcon color="primary" fontSize="large" />
+          <PasswordIcon color="primary" fontSize="large" />
           <Typography component="h1" variant="h5">
            Reset Password
           </Typography>
@@ -89,7 +89,6 @@ export default function ResetPassword () {
               type="password"
               value={state.password2}
               onChange={onChange}
-              
             />
             <Button
               type="submit"
@@ -97,9 +96,7 @@ export default function ResetPassword () {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-            >
-              Send
-            </Button>
+            > Send </Button>
           </Box>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />

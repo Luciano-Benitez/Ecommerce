@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 import {AddShoppingCart} from '@mui/icons-material/';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import accounting from 'accounting';
-import st from '../Products/product.module.css';
+import st from './product.module.css';
 import {Cart} from '../../actions/index';
 
 function Product({product: {id, name, productType, image, price, rating, description}}) {    
@@ -29,7 +29,7 @@ function Product({product: {id, name, productType, image, price, rating, descrip
 
   return (
     <div className={st.root} >
-    <Card >
+    <Card sx={{ maxWidth: 345 }} >
       <CardHeader
         action = {
           <Typography  variant='h5' color='textSecondary' >
@@ -39,12 +39,11 @@ function Product({product: {id, name, productType, image, price, rating, descrip
         title={name}
         subheader='In Stock'
       />
-      <div className={st.img} >
-        <CardMedia 
-          src={image}
+    
+        <CardMedia sx={{display:'flex', justifyContent:'center', borderRadius: '10px', padding:'6rem'}}
+          image={image[0]}
           title={name}
-        />
-      </div>
+        ></CardMedia>
       <CardContent>
         <Typography variant="body2" color="text.seconda ry">
           {productType}
@@ -72,5 +71,6 @@ function Product({product: {id, name, productType, image, price, rating, descrip
     </div>
   );
 };
+
 
 export default Product;

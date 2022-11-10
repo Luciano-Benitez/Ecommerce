@@ -1,7 +1,8 @@
 import {ADD_TO_CART, REMOVE_CART, LOGIN_USER, LOGIN_ADMIN, POST_USER, POST_ADMIN,
         LOGOUT, SHIPPING_DATA, SET_PAYMENT_MESSAGE, EMPTY_CART,GET_PRODUCTS,
         GET_PRODUCTS_ADMIN, PUT_PROFILE, PUT_NAME_ADM, PUT_PASSWORD_ADM,
-        GET_PRODUCT_FOR_ID} from '../actions/types';
+        GET_PRODUCT_FOR_ID, PUT_NAME_PRODUCT, PUT_PRODUCT_TYPE, PUT_PRICE_PRODUCT,
+        PUT_RATING_PRODUCT, PUT_DESCRIPTION_PRODUCT, PUT_IMAGE_PRODUCT} from '../actions/types';
 
 const initialState = {
     allProducts: [],
@@ -105,6 +106,42 @@ const reducer = (state = initialState, {type, payload}) => {
             };
         
         case GET_PRODUCT_FOR_ID:
+            return {
+                ...state,
+                ProductEdit: payload
+            };
+
+        case PUT_NAME_PRODUCT:
+            return {
+                ...state,
+                ProductEdit: payload
+            };
+
+        case PUT_PRODUCT_TYPE:
+            return {
+                ...state,
+                ProductEdit: payload
+            };
+
+        case PUT_PRICE_PRODUCT:
+            return {
+                ...state,
+                ProductEdit: payload
+            };
+
+        case PUT_RATING_PRODUCT:
+            return {
+                ...state,
+                ProductEdit: payload
+            };
+
+        case PUT_DESCRIPTION_PRODUCT:
+            return {
+                ...state,
+                ProductEdit: payload
+            };
+
+        case PUT_IMAGE_PRODUCT:
             return {
                 ...state,
                 ProductEdit: payload

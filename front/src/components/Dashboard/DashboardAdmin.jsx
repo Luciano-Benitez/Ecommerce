@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import { styled } from '@mui/material/styles';
 import { useSelector, useDispatch} from 'react-redux';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
@@ -23,8 +23,6 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Collapse from '@mui/material/Collapse';
-import Card from '@mui/material/Card';
-import st from './DashboardAdmin.module.css';
 import {getProductsAdmin, startLogout} from'../../actions/index';
 import Setting from './Setting/Setting';
 import { Container } from '@mui/system';

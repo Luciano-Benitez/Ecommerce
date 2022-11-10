@@ -1,7 +1,8 @@
 import {ADD_TO_CART, REMOVE_CART, LOGIN_USER, LOGOUT, SHIPPING_DATA,
         SET_PAYMENT_MESSAGE, EMPTY_CART, GET_PRODUCTS, LOGIN_ADMIN,
         GET_PRODUCTS_ADMIN, PUT_PROFILE, PUT_NAME_ADM, PUT_PASSWORD_ADM,
-        GET_PRODUCT_FOR_ID} from './types';
+        GET_PRODUCT_FOR_ID, PUT_NAME_PRODUCT, PUT_PRODUCT_TYPE, PUT_PRICE_PRODUCT,
+        PUT_RATING_PRODUCT, PUT_DESCRIPTION_PRODUCT, PUT_IMAGE_PRODUCT} from './types';
 
 import {fetchLogin, fetchRestorePassword, fetchResetPassword} from '../helpers/search-backend';
 import {cloudynary} from '../helpers/Cloudinary';
@@ -219,5 +220,110 @@ export const getProductForID = (id) => {
             type: GET_PRODUCT_FOR_ID,
             payload: result.data
         });
+    };
+};
+
+export const changeNameProduct = (payload) => {
+    return async (dispatch) => {
+        const result = await axios.put('http://localhost:3001/putNameProduct', payload);
+        const data = result.data;
+        if(data.ok) {
+            dispatch({
+                type: PUT_NAME_PRODUCT,
+                payload: data.newName
+            });
+            Swl.fire('The name was changed successfully');
+        } else {
+            Swl.fire('Failed to change name. Please try again.');
+        };
+    };
+};
+
+export const changeProductType = (payload) => {
+    return async function (dispatch) {
+        const result = await axios.put('http://localhost:3001/putProductType', payload);
+        const data = result.data;
+        console.log('result:', result);
+        if(data.ok) {
+            dispatch({
+                type: PUT_PRODUCT_TYPE,
+                payload: data.newProductType
+            });
+            Swl.fire('The name of the product type was changed successfully');
+        }else {
+            Swl.fire('error renaming product type');
+        }
+    };
+};
+
+export const putPriceProduct = (payload) => {
+    return async (dispatch) => {
+        const result = await axios.put('http://localhost:3001/putPriceProduct', payload);
+        const data = result.data;
+        if(data.ok){
+            dispatch({
+                type: PUT_PRICE_PRODUCT,
+                payload: data.newProduct
+            });
+            Swl.fire('The price of the product was changed successfully.');
+        } else {
+            Swl.fire('Error changing product price.');
+        }
+    };
+};
+
+export const putRatingProduct = (payload) => {
+    return async (dispatch) => {
+        const result = await axios.put('http://localhost:3001/putRatingProduct', payload);
+        const data = result.data;
+        if(data.ok) {
+            dispatch({
+                type: PUT_RATING_PRODUCT,
+                payload: data.newProduct
+            });
+            Swl.fire('The product rating was changed successfully');
+        } else {
+            Swl.fire('Error when changing the product rating');
+        }
+    };
+};
+
+export const putDescriptionProduct = (payload) => {
+    return async (dispatch) => {
+        const result = await axios.put('http://localhost:3001/putDescriptionProduct', payload);
+        const data = result.data;
+        if(data.ok){
+            dispatch({
+                type: PUT_DESCRIPTION_PRODUCT,
+                payload: data.newProduct
+            });
+            Swl.fire('The description was changed successfully.')
+        } else {
+            Swl.fire('Error changing description.')
+        };
+    };
+};
+
+export const uploadImageProduct = (formData) => {
+    return async () => {
+      const resp = await cloudynary(formData);
+      const body = await resp.data.secure_url;
+      return body;
+    };
+};
+
+export const putImageProduct = (payload) => {
+    return async (dispatch) => {
+        const result = await axios.put('http://localhost:3001/putImageProduct', payload);
+        const data = result.data;
+        if(data.ok){
+            dispatch({
+                type: PUT_IMAGE_PRODUCT,
+                payload: data.newProduct
+            });
+            Swl.fire('The image was loaded correctly.');
+        } else { 
+            Swl.fire('Image upload error.');
+        };
     };
 };

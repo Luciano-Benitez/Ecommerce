@@ -1,16 +1,15 @@
 import React from 'react';
 import {useDispatch} from 'react-redux';
 import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import LockResetIcon from '@mui/icons-material/LockReset';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import CssBaseline from '@mui/material/CssBaseline';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import st from './ForgotPassword.module.css';
-import Swl from 'sweetalert2';
 import {startRestorePassword} from '../../actions/index';
+import st from './ForgotPassword.module.css';
 
 function Copyright(props) {
   return (
@@ -21,7 +20,7 @@ function Copyright(props) {
       {'.'}
     </Typography>
   );
-}
+};
 
 const theme = createTheme();
 
@@ -36,7 +35,7 @@ export default function ForgotPassword () {
     setState({
       ...state,
       [e.target.name]: e.target.value
-    })
+    });
   };
 
   const handleSubmit = (e) => {
@@ -81,9 +80,7 @@ export default function ForgotPassword () {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-            >
-              Login
-            </Button>
+            > Login </Button>
           </Box>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />

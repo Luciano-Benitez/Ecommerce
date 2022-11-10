@@ -18,11 +18,12 @@
 };
 
 .img {
-  height: 0;
-  padding-top: 56.25%;
-}
+ display: flex;
+ justify-content: center;
+ height: 12rem;
+};
 
 .cardAct {
   justify-content: space-between;
-}
+};
 

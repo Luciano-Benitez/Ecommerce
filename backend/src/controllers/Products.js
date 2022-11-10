@@ -61,3 +61,136 @@ exports.getProductForID = async (req, res = response) => {
         console.log('Error:', error);
     }
 };
+
+exports.putNameProduct = async (req, res = response) => {
+    try {
+        const {id, name} = req.body;
+        const result = await Products.update({
+            name: name
+        },
+        {
+            where: {id: id}
+        });
+        const newName = await Products.findByPk(id,{
+            attributes: {
+                exclude: ['createdAt','updatedAt']
+            }
+        });
+
+        result !== undefined ? res.status(200).json({ok:true, newName}) :
+        res.status(404).json({ok:false});
+    } catch (error) {
+        console.log('Error:', error);
+        res.json(error);
+    };
+};
+
+exports.putProductType = async (req, res = response) => {
+    try {
+        const {id, newType} = req.body;
+        const result = await Products.update({
+            productType: newType
+        },
+        {
+            where: {id: id}
+        });
+        const newProductType = await Products.findByPk(id,{
+            attributes: {
+                exclude: ['createdAt','updatedAt']
+            }
+        });
+
+        result !== undefined ? res.status(200).json({ok:true, newProductType}) :
+        res.status(404).json({ok:false});
+    } catch (error) {
+        console.log('Error:', error);
+        res.json(error);
+    }
+};
+
+exports.putPriceProduct = async (req, res = response) => {
+    try {
+        const {id, newPrice} = req.body;
+        const result = await Products.update({
+            price: newPrice
+        },{
+            where:{id: id}
+        });
+        const newProduct = await Products.findByPk(id,{
+            attributes: {
+                exclude: ['createdAt', 'updatedAt']
+            }
+        });
+        result !== undefined ? res.status(200).json({ok:true, newProduct}) : 
+        res.status(404).json({ok:false});
+
+    } catch (error) {
+        console.log('Error:', error);
+        res.json(error);
+    };
+};
+
+exports.putRatingProduct = async (req, res = response) => {
+    try {
+        const {id, newRating} = req.body;
+        const result = await Products.update({
+            rating: newRating
+        },
+        {
+            where: {id: id}
+        });
+        const newProduct = await Products.findByPk(id,{
+            attributes: {
+                exclude: ['createdAt', 'updatedAt']
+            }
+        });
+        result !== undefined ? res.status(200).json({ok: true, newProduct}) : 
+        res.status(404).json({ok: false});
+    } catch (error) {
+        console.log('Error:', error);
+        res.json(error);
+    }
+};
+
+exports.putDescriptionProduct = async (req, res = response) => {
+    try {
+        const {id, newDescription} = req.body;
+        const result = await Products.update({
+            description: newDescription
+        },
+        {
+            where: {id: id}
+        });
+        const newProduct = await Products.findByPk(id,{
+            attributes: {
+                exclude: ['createdAt', 'updatedAt']
+            }
+        });
+        result !== undefined ? res.status(200).json({ok:true, newProduct}) : 
+        res.status(404).json({ok:false});
+    } catch (error) {
+        console.log('Error:', error);
+        res.json(error);
+    }
+};
+
+exports.putImageProduct = async (req, res = response) => {
+    try {
+        const {id, newImage} = req.body;
+        const result = await Products.update({
+            image: [newImage]
+        },{
+            where: {id: id}
+        });
+        const newProduct = await Products.findByPk(id,{
+            attributes: {
+                exclude: ['createdAt', 'updatedAt']
+            }
+        });
+        result !== undefined ? res.status(200).json({ok: true, newProduct}) :
+        res.status(404).json({ok: false}); 
+    } catch (error) {
+        console.log('Error:', error);
+        res.json(error);
+    }
+};

@@ -17,10 +17,6 @@
   transform: 'rotate(180deg)';
 };
 
-.img {
-  background-image: url('../Products/img/nike.jpg');
-}
-
 .cardAct {
     display: flex;
     justify-content: space-between;

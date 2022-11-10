@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import st from '../Products/products.module.css';
 import Grid from '@mui/material/Grid';
 import Product from '../Products/Product';
-import st from '../Products/products.module.css';
 import {getProducts} from '../../actions/index';
 
 const Products = () => {

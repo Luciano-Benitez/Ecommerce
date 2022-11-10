@@ -10,10 +10,10 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {loginAdmin} from '../../actions/index';
 import st from './SignIn.module.css';
+import { Paper } from '@mui/material';
 
 function Copyright(props) {
   return (
@@ -24,11 +24,11 @@ function Copyright(props) {
       {'.'}
     </Typography>
   );
-}
+};
 
 const theme = createTheme();
 
-export default function SignInAdmin () {
+export default function SignInAdmin() {
   const dispatch = useDispatch();
   const history = useNavigate();
   const [state, setState] = React.useState({
@@ -40,36 +40,51 @@ export default function SignInAdmin () {
     setState({
       ...state,
       [e.target.name]: e.target.value
-    })
+    });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(loginAdmin(state.email, state.password), history('/DashboardAdmin'));
     setState({email:'', password:''});
-    history('/')
+    history('/');
   };
-  
 
   return (
-    <ThemeProvider theme={theme}  >
-      <Container component="main" maxWidth="xs" className={st.b1} >
+    <ThemeProvider theme={theme}>
+      <Grid container component="main" sx={{ height: '100vh' }} className={st.b1} >
         <CssBaseline />
-        <Box
+        <Grid
+          item
+          xs={false}
+          sm={4}
+          md={7}
           sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            backgroundImage: 'url(https://source.unsplash.com/random)',
+            backgroundRepeat: 'no-repeat',
+            backgroundColor: (t) =>
+              t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
           }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in Admin
-          </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        />
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+          <Box
+            sx={{
+              my: 8,
+              mx: 4,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+             <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign in Admin
+            </Typography>
+            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
@@ -83,7 +98,7 @@ export default function SignInAdmin () {
               autoComplete="email"
               autoFocus
             />
-            <TextField
+              <TextField
               margin="normal"
               required
               fullWidth
@@ -95,7 +110,7 @@ export default function SignInAdmin () {
               onChange={onChange}
               autoComplete="current-password"
             />
-            <Button
+              <Button
               type="submit"
               disabled={!state.email || !state.password}
               fullWidth
@@ -105,22 +120,22 @@ export default function SignInAdmin () {
               Login
             </Button>
             <Grid container sx={{justifyContent:'space-between'}} >
-              <Grid item >
-                <Link href="/Forgot-Password" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
+               <Grid item >
+                 <Link href="/Forgot-Password" variant="body2">
+                   Forgot password?
+                 </Link>
+               </Grid>
               <Grid item>
-                <Link href="/SignUp-Admin" variant="body2">
-                  Don't have an account? Sign Up
-                </Link>
+                 <Link href="/SignUp-Admin" variant="body2">
+                   Don't have an account? Sign Up
+                 </Link>
               </Grid>
-            </Grid>
+             </Grid>
+            </Box>
           </Box>
-        </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
-      </Container>
+          <Copyright sx={{ mt: 5 }} />
+        </Grid>
+      </Grid>
     </ThemeProvider>
   );
 };
-

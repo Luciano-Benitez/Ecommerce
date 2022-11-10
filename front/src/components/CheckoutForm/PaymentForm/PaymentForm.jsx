@@ -8,9 +8,6 @@ import {loadStripe} from '@stripe/stripe-js';
 import st from './PaymentForm.module.css';
 import accounting from 'accounting';
 import {paymentMessage, startEmtyCart} from '../../../actions/index';
-// import {useStateValue} from '../../../StateProvider';
-
-
 
 function PaymentForm({backStep, nextStep}) {
   const stripePromise = loadStripe('pk_test_51KYwSkGKrvjozYj3Bzb1uUvezvvvgpJLZ30SclJ749J1Rakv0im3nHBt5wdCKEehDSEdGFPupexafsO2BD6kSqhX00XLNReNgO');
@@ -39,7 +36,7 @@ function PaymentForm({backStep, nextStep}) {
         await elements.getElement(CardElement).clear();
         nextStep();
         if(message === 'Successful Payment'){
-          dispatch(startEmtyCart());//QUEDA PENDIENTE SOLUCIONAR.
+          dispatch(startEmtyCart());
         }
       } catch (error) {
         console.log('error:', error);

@@ -32,7 +32,7 @@ function Review() {
       </ListItem>
     </List>
     </>
-  )
+  );
 };
 
 export default Review

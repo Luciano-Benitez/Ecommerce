@@ -1,4 +1,4 @@
-const {DataTypes} = require('sequelize');
+const {DataTypes, Sequelize} = require('sequelize');
 
 module.exports = (sequelize) => {
     sequelize.define('products', {
@@ -25,8 +25,7 @@ module.exports = (sequelize) => {
             allowNull: false,
         },
         image: {
-            type: DataTypes.ARRAY(DataTypes.TEXT),
-            allowNull: false,
+            type: DataTypes.ARRAY(Sequelize.TEXT)
         },
         description: {
             type: DataTypes.TEXT,
