@@ -16,10 +16,3 @@
 .expandOpen {
   transform: 'rotate(180deg)';
 };
-
-.cardAct {
-    display: flex;
-    justify-content: space-between;
-    text-align: center;
-};
-

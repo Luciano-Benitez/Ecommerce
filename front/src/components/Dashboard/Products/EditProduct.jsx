@@ -181,7 +181,7 @@ const EditProduct = () => {
     },[dispatch, id]); 
 
     return (
-        <Paper elevation={3} className={st.Paper} >
+        <Paper elevation={3} className={st.Paper} /* style={{backgroundColor:'#E8F9FD'}} */ >
             <Box sx={{display:'flex', justifyContent:'space-around'}}>
                 <Button variant="outlined" component={Link} to='/DashboardAdmin' >Back to Dashboard</Button>
                 <Button variant="outlined" color='error' onClick={destroyProduct} >Remove product </Button>

@@ -15,7 +15,9 @@ const Total = () => {
         <div className={st.Principal} >
             <h5>Total Items: {Items}</h5>
             <h5>{accounting.formatMoney(Total)}</h5>
-            <Button component={Link} to='/CheckOut' className={st.Button} variant='contained' color='success' >Check Out</Button>
+            <Button component={Link} to='/CheckOut' className={st.Button} variant='outlined' style={{color:'#0AA1DD'}} >
+                <strong>Check Out</strong>
+            </Button>
         </div>
     );
 };

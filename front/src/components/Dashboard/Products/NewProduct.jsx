@@ -61,7 +61,7 @@ export default function NewProduct() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs" >
         <Box
           sx={{
             display: 'flex',

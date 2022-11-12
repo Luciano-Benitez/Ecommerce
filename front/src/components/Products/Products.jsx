@@ -25,7 +25,7 @@ const Products = () => {
   },[dispatch]);
 
   return (
-    <div className={st.root} >
+    <div className={st.root} style={{backgroundColor:'#E8F9FD'}} >
           <Paginado
             productsPerPage={productsPerPage}
             allProducts={AllProducts.length}

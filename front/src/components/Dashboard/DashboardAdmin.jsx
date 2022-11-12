@@ -159,7 +159,7 @@ export default function DashboardAdmin() {
 
   return (
     <Box>
-      <AppBar position="fixed" open={openMenu}>
+      <AppBar position="fixed" open={openMenu} style={{backgroundColor:'#0AA1DD'}}>
         <Toolbar sx={{display: 'flex', justifyContent:'space-between'}} >
           <IconButton color="inherit" aria-label="open drawer" onClick={handleMenu} edge="start" sx={{
               ...(openMenu && { display: 'none' }),

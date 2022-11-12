@@ -40,7 +40,7 @@ const CheckoutCard = ({product: {id, name, productType, image, price, rating, de
           {productType}
         </Typography>
       </CardContent>
-      <CardActions disableSpacing className={st.cardAct}>
+      <CardActions disableSpacing sx={{display:'flex', justifyContent:'space-evenly'}}>
           {Array(rating).fill().map((_, i) => (
             <p >&#11088;</p>
           ))}
