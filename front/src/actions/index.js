@@ -2,12 +2,30 @@ import {ADD_TO_CART, REMOVE_CART, LOGIN_USER, LOGOUT, SHIPPING_DATA,
         SET_PAYMENT_MESSAGE, EMPTY_CART, GET_PRODUCTS, LOGIN_ADMIN,
         GET_PRODUCTS_ADMIN, PUT_PROFILE, PUT_NAME_ADM, PUT_PASSWORD_ADM,
         GET_PRODUCT_FOR_ID, PUT_NAME_PRODUCT, PUT_PRODUCT_TYPE, PUT_PRICE_PRODUCT,
-        PUT_RATING_PRODUCT, PUT_DESCRIPTION_PRODUCT, PUT_IMAGE_PRODUCT} from './types';
+        PUT_RATING_PRODUCT, PUT_DESCRIPTION_PRODUCT, PUT_IMAGE_PRODUCT, POST_PRODUCT,
+        DELETE_PRODUCT} from './types';
 
 import {fetchLogin, fetchRestorePassword, fetchResetPassword} from '../helpers/search-backend';
 import {cloudynary} from '../helpers/Cloudinary';
 import Swl from 'sweetalert2';
 import axios from 'axios';
+import { ConstructionOutlined } from '@mui/icons-material';
+
+export const postNewProduct = (payload) => { 
+    return async (dispatch) => {
+        const result = await axios.post('http://localhost:3001/postProduct', payload);
+        const data = result.data;
+        console.log('data:', data);
+        if(data.ok) {
+            dispatch({
+                type: POST_PRODUCT,
+            });
+            Swl.fire('Successfully created product.');
+        } else {
+            Swl.fire('Error when creating the product.');
+        };
+    };
+};
 
 export const getProducts = () => {
     return async function(dispatch){
@@ -324,6 +342,19 @@ export const putImageProduct = (payload) => {
             Swl.fire('The image was loaded correctly.');
         } else { 
             Swl.fire('Image upload error.');
+        };
+    };
+};
+
+export const deleteProduct = (id) => {
+    return async function (dispatch){
+        const result = await axios.delete('http://localhost:3001/deleteProduct/' + id);
+        const data = result.data;
+        if(data.ok) {
+            dispatch({
+                type: DELETE_PRODUCT
+            });
+            Swl.fire('The product was removed successfully.');
         };
     };
 };

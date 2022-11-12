@@ -2,7 +2,8 @@ import {ADD_TO_CART, REMOVE_CART, LOGIN_USER, LOGIN_ADMIN, POST_USER, POST_ADMIN
         LOGOUT, SHIPPING_DATA, SET_PAYMENT_MESSAGE, EMPTY_CART,GET_PRODUCTS,
         GET_PRODUCTS_ADMIN, PUT_PROFILE, PUT_NAME_ADM, PUT_PASSWORD_ADM,
         GET_PRODUCT_FOR_ID, PUT_NAME_PRODUCT, PUT_PRODUCT_TYPE, PUT_PRICE_PRODUCT,
-        PUT_RATING_PRODUCT, PUT_DESCRIPTION_PRODUCT, PUT_IMAGE_PRODUCT} from '../actions/types';
+        PUT_RATING_PRODUCT, PUT_DESCRIPTION_PRODUCT, PUT_IMAGE_PRODUCT, POST_PRODUCT,
+        DELETE_PRODUCT} from '../actions/types';
 
 const initialState = {
     allProducts: [],
@@ -49,6 +50,11 @@ const reducer = (state = initialState, {type, payload}) => {
         case POST_USER:
             return {
                 ...state,
+            };
+
+        case POST_PRODUCT:
+            return {
+                ...state
             };
         
         case PUT_PROFILE:
@@ -145,6 +151,11 @@ const reducer = (state = initialState, {type, payload}) => {
             return {
                 ...state,
                 ProductEdit: payload
+            };
+
+        case DELETE_PRODUCT:
+            return {
+                ...state
             };
 
         default:

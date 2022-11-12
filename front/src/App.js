@@ -13,6 +13,7 @@ import DashboardAdmin from './components/Dashboard/DashboardAdmin';
 import SignInAdmin from './components/Sessions/SignInAdmin';
 import SignUpAdmin from './components/Sessions/SignUpAdmin';
 import EditProduct from './components/Dashboard/Products/EditProduct';
+import NewProduct from './components/Dashboard/Products/NewProduct';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route exact path="/SignIn-Admin" element={<><NavBar/><SignInAdmin/></>}/>
         <Route exact path="/DashboardAdmin" element={<DashboardAdmin/>}/>
         <Route exact path="/DashboardAdmin/EditProduct/:id" element={<EditProduct/>}/>
+        <Route exact path="/DashboardAdmin/NewProduct" element={<NewProduct/>}/>
 
         <Route exact path="/ConfirmAccount" element={<><NavBar/><ConfirmAccount/></>}/>
         <Route exact path="/Forgot-Password" element={<><NavBar/><ForgotPassword/></>}/>

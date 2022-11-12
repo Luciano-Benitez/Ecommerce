@@ -31,8 +31,8 @@ const CheckoutCard = ({product: {id, name, productType, image, price, rating, de
         title={name}
         subheader='In Stock'
       />
-      <CardMedia 
-      image={image}
+      <CardMedia sx={{display:'flex', justifyContent:'center', borderRadius: '10px', padding:'6rem'}}
+      image={image[0]}
         title={name}
       />
       <CardContent>

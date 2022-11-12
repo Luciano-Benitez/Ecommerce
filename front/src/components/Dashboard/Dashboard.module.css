@@ -1,15 +1,11 @@
-.b1 {
-    margin-top: 2%;
-};
-
 .app{
     background-image: url('../img/Shopping3.jpg');
-    /* background-repeat: no-repeat;
+    background-repeat: no-repeat;
     width: 50vw;
     height: 80vh;
     background-size: auto;
     display: flex;
     margin-left: 25%;
-    margin-bottom: -3rem; */
+    margin-bottom: -3rem;
 
  };

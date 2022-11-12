@@ -12,3 +12,8 @@
     display: grid;
     justify-content: inherit;
 };
+
+.botons{
+    display: flex;
+    justify-content: space-around
+};

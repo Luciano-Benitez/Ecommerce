@@ -7,7 +7,7 @@ exports.getProducts = () => {
         ProductData.products.forEach(async (element) => {
             await Products.findOrCreate({
                 where: {
-                    id: element.id,
+                    // id: element.id,
                     name: element.name,
                     productType: element.productType,
                     price: element.price,

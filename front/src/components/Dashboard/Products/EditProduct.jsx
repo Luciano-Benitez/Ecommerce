@@ -1,12 +1,12 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import {getProductForID, changeNameProduct, changeProductType, putPriceProduct,
         putRatingProduct, putDescriptionProduct, uploadImageProduct,
-        putImageProduct} from '../../../actions/index';
+        putImageProduct, deleteProduct} from '../../../actions/index';
 import Paper from '@mui/material/Paper'
 import {Box, Collapse} from '@mui/material';
 import MenuList from '@mui/material/MenuList';
@@ -25,19 +25,25 @@ import TextField from '@mui/material/TextField';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import accounting from 'accounting';
 
 const EditProduct = () => {
     const {id} = useParams();
-    const ID = useSelector(state => state.ProductEdit.id);
     const product = useSelector(state => state.ProductEdit);
     const imageProduct = useSelector(state => state.ProductEdit.image);
     const dispatch = useDispatch();
+    const history = useNavigate();
     
     const [boxName, setBoxName] = React.useState(false); 
-    const openBoxName = () => {  
+    const openBoxName = () => {
+        {boxProductType === true && setBoxProductType(!boxProductType)}
+        {boxPrice === true && setBoxPrice(!boxPrice)}
+        {boxRating === true && setBoxRating(!boxRating)}
+        {boxDescription === true && setBoxDescription(!boxDescription)}
+        {boxImage === true && setBoxImage(!boxImage)}  
         setBoxName(!boxName)
     };
-    const [stateName, setStateName] = React.useState({id: ID, name:''});
+    const [stateName, setStateName] = React.useState({id: id, name:''});
     const changeName = (e) => {
         setStateName({
             ...stateName,
@@ -51,10 +57,15 @@ const EditProduct = () => {
     };
 
     const [boxProductType, setBoxProductType] = React.useState(false);
-    const openBoxProductType = () => {  
+    const openBoxProductType = () => {
+        {boxName === true && setBoxName(!boxName)}
+        {boxPrice === true && setBoxPrice(!boxPrice)}
+        {boxRating === true && setBoxRating(!boxRating)}
+        {boxDescription === true && setBoxDescription(!boxDescription)}
+        {boxImage === true && setBoxImage(!boxImage)}    
         setBoxProductType(!boxProductType)
     };
-    const [stateProductType, setProductType] = React.useState({id: ID, newType:''});
+    const [stateProductType, setProductType] = React.useState({id: id, newType:''});
     const changeNamePType = (e) => {  
         setProductType({
             ...stateProductType,
@@ -69,9 +80,14 @@ const EditProduct = () => {
 
     const [boxPrice, setBoxPrice] = React.useState(false);
     const openBoxPrice = () => {
+        {boxName === true && setBoxName(!boxName)}
+        {boxProductType === true && setBoxProductType(!boxProductType)}
+        {boxRating === true && setBoxRating(!boxRating)}
+        {boxDescription === true && setBoxDescription(!boxDescription)}
+        {boxImage === true && setBoxImage(!boxImage)}    
         setBoxPrice(!boxPrice);
     };
-    const [statePrice, setStatePrice] = React.useState({id: ID, newPrice: ''});
+    const [statePrice, setStatePrice] = React.useState({id: id, newPrice: ''});
     const changePrice = (e) => {  
         setStatePrice({
             ...statePrice,
@@ -86,9 +102,14 @@ const EditProduct = () => {
 
     const [boxRating, setBoxRating] = React.useState(false);
     const openBoxRating = () => {
+        {boxName === true && setBoxName(!boxName)}
+        {boxProductType === true && setBoxProductType(!boxProductType)}
+        {boxPrice === true && setBoxPrice(!boxPrice)}
+        {boxDescription === true && setBoxDescription(!boxDescription)}
+        {boxImage === true && setBoxImage(!boxImage)}
         setBoxRating(!boxRating)
     };
-    const [stateRating, setStateRating] = React.useState({id: ID, newRating:''});
+    const [stateRating, setStateRating] = React.useState({id: id, newRating:''});
     const changeRating = (e) => {
         setStateRating({
             ...stateRating,
@@ -103,9 +124,14 @@ const EditProduct = () => {
 
     const [boxDescription, setBoxDescription] = React.useState(false);
     const openBoxDescription = () => {
+        {boxName === true && setBoxName(!boxName)}
+        {boxProductType === true && setBoxProductType(!boxProductType)}
+        {boxPrice === true && setBoxPrice(!boxPrice)}
+        {boxRating === true && setBoxRating(!boxRating)}
+        {boxImage === true && setBoxImage(!boxImage)}
         setBoxDescription(!boxDescription);
     };
-    const [stateDescription, setStateDescription] = React.useState({id: ID, newDescription:''});
+    const [stateDescription, setStateDescription] = React.useState({id: id, newDescription:''});
     const changeDescription = (e) => {
         setStateDescription({
             ...stateDescription,
@@ -120,6 +146,11 @@ const EditProduct = () => {
 
     const [boxImage, setBoxImage] = React.useState(false);
     const openBoxImage = () => {
+        {boxName === true && setBoxName(!boxName)}
+        {boxProductType === true && setBoxProductType(!boxProductType)}
+        {boxPrice === true && setBoxPrice(!boxPrice)}
+        {boxRating === true && setBoxRating(!boxRating)}
+        {boxDescription === true && setBoxDescription(!boxDescription)}
         setBoxImage(!boxImage)
     };
     const [stateImage, setStateImage] = React.useState({id: id, newImage:''});
@@ -139,13 +170,22 @@ const EditProduct = () => {
         {boxImage === true && setBoxImage(!boxImage)}
     };
 
+    const destroyProduct = (e) => {  //Function for delete product.
+        e.preventDefault();
+        dispatch(deleteProduct(id));
+        history('/DashboardAdmin');
+    };
+
     useEffect(() => {
         dispatch(getProductForID(id))
     },[dispatch, id]); 
 
     return (
         <Paper elevation={3} className={st.Paper} >
-            <Button variant="outlined" component={Link} to='/DashboardAdmin' >Back to Dashboard</Button>
+            <Box sx={{display:'flex', justifyContent:'space-around'}}>
+                <Button variant="outlined" component={Link} to='/DashboardAdmin' >Back to Dashboard</Button>
+                <Button variant="outlined" color='error' onClick={destroyProduct} >Remove product </Button>
+            </Box>
             <MenuList className={st.Menu} >
                 <MenuItem sx={{display:'grid', justifyContent:'inherit'}} >
                     <ListItemIcon onClick={openBoxName} >
@@ -163,19 +203,20 @@ const EditProduct = () => {
                     </ListItemIcon>
                 </MenuItem>
                 <Divider/>
-                <MenuItem sx={{display:'grid', justifyContent:'inherit'}} >
+                <MenuItem sx={{ display:'grid',  justifyContent:'inherit'}} >
                     <ListItemIcon onClick={openBoxPrice} >
                         <CurrencyExchangeIcon sx={{marginRight:'1rem'}} />
                         <ListItemText>Change Price</ListItemText>
-                        <ListItemText  >{product.price}</ListItemText>
+                        <ListItemText>{accounting.formatMoney(product.price)}</ListItemText>
                     </ListItemIcon>
+                    
                 </MenuItem>
                 <Divider/>
                 <MenuItem sx={{display:'grid', justifyContent:'inherit'}} >
                     <ListItemIcon onClick={openBoxRating} >
-                        <StarHalfIcon sx={{marginRight:'1rem'}} />
-                        <ListItemText>Change Rating</ListItemText>
-                        <ListItemText  >{product.rating}</ListItemText>
+                        <StarHalfIcon sx={{marginRight:'1%', paddingTop:'1%'}} />
+                        <ListItemText sx={{paddingTop:'1%'}} >Change Rating</ListItemText>
+                        <ListItemIcon sx={{marginRight:'42%'}} >{Array(product.rating).fill().map((_, i) => (<p>&#11088;</p>))}</ListItemIcon>
                     </ListItemIcon>
                 </MenuItem>
                 <Divider/>

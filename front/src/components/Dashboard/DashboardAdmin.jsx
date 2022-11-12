@@ -27,6 +27,7 @@ import {getProductsAdmin, startLogout} from'../../actions/index';
 import Setting from './Setting/Setting';
 import { Container } from '@mui/system';
 import Products from './Products/Products';
+import st from './Dashboard.module.css';
 
 const drawerWidth = 240;
 
@@ -102,6 +103,8 @@ export default function DashboardAdmin() {
   const fullName = useSelector(state => state.User.name);
   const profilePicture = useSelector(state => state.User.profilePicture);
 
+  const [backImg, setBackImg] = React.useState(true);
+
   const [profile, setProfile] = React.useState(false); 
   const handleProfile = () => { //Open/Close the profile.
     setProfile(!profile);
@@ -111,6 +114,7 @@ export default function DashboardAdmin() {
 
   const [openSetting, setOpenSetting] = React.useState(false);
   const OpenSetting = () => {  //Open/Close Setting.
+    {backImg === true && setBackImg(!backImg)}
     {openProducts === true && setOpenProducts(!openProducts)}
     setOpenSetting(!openSetting);
   };
@@ -132,10 +136,12 @@ export default function DashboardAdmin() {
     {openSetting === true && setOpenSetting(!openSetting)}
     {openMenu === true && setOpenMenu(!openMenu)}
     {openProducts === true && setOpenProducts(!openProducts)}
+    {backImg === false && setBackImg(!backImg)}
   };
 
   const [openProducts, setOpenProducts] = React.useState(false);
   const openAllProducts = () => {  //Open/Close allProducts the Dashboard.
+    {backImg === true && setBackImg(!backImg)}
     {profile === true && setProfile(!profile)}
     {openMenu === true && setOpenMenu(!openMenu)}
     {openSetting === true && setOpenSetting(!openSetting)}
@@ -158,7 +164,7 @@ export default function DashboardAdmin() {
           <IconButton color="inherit" aria-label="open drawer" onClick={handleMenu} edge="start" sx={{
               ...(openMenu && { display: 'none' }),
             }}><MenuIcon/></IconButton>
-          <Typography variant="h6" noWrap component="div">{`${fullName}`}</Typography>
+          <Typography variant="h6" noWrap component="div">{`Welcome ${fullName}`}</Typography>
           <IconButton sx={{marginRight:'2rem'}} onClick={handleProfile} aria-expanded={profile}  >
             <Avatar src={profilePicture} sx={{ width: 45, height: 45 }} />
           </IconButton>
@@ -218,6 +224,12 @@ export default function DashboardAdmin() {
         <Container>
           <Collapse in={openProducts} unmountOnExit >
               <Products/>
+          </Collapse>
+        </Container>
+
+        <Container>
+          <Collapse in={backImg} >
+            {<div className={st.app} />}
           </Collapse>
         </Container>
       </Box>

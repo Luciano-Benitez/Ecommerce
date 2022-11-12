@@ -1,85 +1,265 @@
 {
     "products": [
         {
-            "id":1,
+           
             "name": "Shoes",
             "productType": "Running Shoes",
             "price": 50,
             "rating": 4,
             "image": "",
             "description": "Shoes Air our iconic innovation that uses pressurized air in a durable.",
-            "userId": 4
+            "userId": 1
         },
         {
-            "id":2,
+            
             "name": "Shoes",
             "productType": "Running Shoes",
             "price": 50,
             "rating": 4,
             "image": "",
             "description": "Shoes Air our iconic innovation that uses pressurized air in a durable.",
-            "userId": 4
+            "userId": 1
         },
         {
-            "id":3,
+            
             "name": "Shirt",
             "productType": "Sport",
             "price": 60,
             "rating": 5,
             "image": "",
             "description": "Shirt Air our iconic innovation that uses pressurized air in a durable.",
-            "userId": 4
+            "userId": 1
         },
         {
-            "id":4,
+            
             "name": "Shirt",
             "productType": "Dress Shirt",
             "price": 15,
             "rating": 1,
             "image": "",
             "description": "Shirt Air our iconic innovation that uses pressurized air in a durable.",
-            "userId": 4
+            "userId": 1
         },
         {
-            "id":5,
+            
             "name": "Pants",
             "productType": "Dress Pants",
             "price": 20,
             "rating": 3,
             "image": "",
             "description": "Pants Air our iconic innovation that uses pressurized air in a durable.",
-            "userId": 4
-    },
-    {
-        "id":6,
-        "name": "Pants",
-        "productType": "Sport",
-        "price": 25,
-        "rating": 4,
-        "image": "",
-        "description": "Pants Air our iconic innovation that uses pressurized air in a durable.",
-        "userId": 4
-    },
-    {
-        "id":7,
-        "name": "Cap",
-        "productType": "Traditional Cap",
-        "price": 10,
-        "rating": 2,
-        "image": "",
-        "description": "Cap Air our iconic innovation that uses pressurized air in a durable.",
-        "userId": 4
-    },
-    {
-        "id":8,
-        "name": "Cap",
-        "productType": "Sport Cap",
-        "price": 15,
-        "rating": 3,
-        "image":"",
-        "description": "Cap Air our iconic innovation that uses pressurized air in a durable.",
-        "userId": 4
-    }
+            "userId": 1
+        },
+        {
+            
+            "name": "Pants",
+            "productType": "Sport",
+            "price": 25,
+            "rating": 4,
+            "image": "",
+            "description": "Pants Air our iconic innovation that uses pressurized air in a durable.",
+            "userId": 1
+        },
+        {
+            
+            "name": "Cap",
+            "productType": "Traditional Cap",
+            "price": 10,
+            "rating": 2,
+            "image": "",
+            "description": "Cap Air our iconic innovation that uses pressurized air in a durable.",
+            "userId": 1
+        },
+        {
+            
+            "name": "Cap",
+            "productType": "Sport Cap",
+            "price": 15,
+            "rating": 3,
+            "image":"",
+            "description": "Cap Air our iconic innovation that uses pressurized air in a durable.",
+            "userId": 1
+        },
+        {
+            
+            "name": "Pants",
+            "productType": "Sport pants",
+            "price": 15,
+            "rating": 3,
+            "image":"",
+            "description": "Cap Air our iconic innovation that uses pressurized air in a durable.",
+            "userId": 1
+        },
+        {
+            
+            "name": "Cap",
+            "productType": "Sport Cap",
+            "price": 15,
+            "rating": 3,
+            "image":"",
+            "description": "Cap Air our iconic innovation that uses pressurized air in a durable.",
+            "userId": 1
+        },
+        {
+            
+            "name": "Cap",
+            "productType": "Sport Cap",
+            "price": 15,
+            "rating": 3,
+            "image":"",
+            "description": "Cap Air our iconic innovation that uses pressurized air in a durable.",
+            "userId": 1
+        },
+        {
+            
+            "name": "Shirt",
+            "productType": "Sport Shirt",
+            "price": 15,
+            "rating": 3,
+            "image":"",
+            "description": "Cap Air our iconic innovation that uses pressurized air in a durable.",
+            "userId": 1
+        },
+        {
+            
+            "name": "Cap",
+            "productType": "Sport Cap",
+            "price": 15,
+            "rating": 3,
+            "image":"",
+            "description": "Cap Air our iconic innovation that uses pressurized air in a durable.",
+            "userId": 1
+        },
+        {
+            
+            "name": "Cap",
+            "productType": "Urban Cap",
+            "price": 15,
+            "rating": 3,
+            "image":"",
+            "description": "Cap Air our iconic innovation that uses pressurized air in a durable.",
+            "userId": 1
+        },
+        {
+            
+            "name": "Shoes",
+            "productType": "Sport Shoes",
+            "price": 15,
+            "rating": 3,
+            "image":"",
+            "description": "Cap Air our iconic innovation that uses pressurized air in a durable.",
+            "userId": 1
+        },
+        {
+            
+            "name": "Pants",
+            "productType": "Dress pants",
+            "price": 15,
+            "rating": 3,
+            "image":"",
+            "description": "Cap Air our iconic innovation that uses pressurized air in a durable.",
+            "userId": 1
+        },
+        {
+            
+            "name": "Shirt",
+            "productType": "Sport Shirt",
+            "price": 15,
+            "rating": 3,
+            "image":"",
+            "description": "Cap Air our iconic innovation that uses pressurized air in a durable.",
+            "userId": 1
+        },
+        {
+            
+            "name": "Shirt",
+            "productType": "Dress Shirt",
+            "price": 15,
+            "rating": 3,
+            "image":"",
+            "description": "Cap Air our iconic innovation that uses pressurized air in a durable.",
+            "userId": 1
+        },
+        {
+            
+            "name": "Jacket",
+            "productType": "Sport jacket",
+            "price": 15,
+            "rating": 3,
+            "image":"",
+            "description": "Cap Air our iconic innovation that uses pressurized air in a durable.",
+            "userId": 1
+        },
+        {
+            
+            "name": "Jacket",
+            "productType": "Warm jacket",
+            "price": 15,
+            "rating": 3,
+            "image":"",
+            "description": "Cap Air our iconic innovation that uses pressurized air in a durable.",
+            "userId": 1
+        },
+        {
+            
+            "name": "Shoes",
+            "productType": "Urban shoes",
+            "price": 15,
+            "rating": 3,
+            "image":"",
+            "description": "Cap Air our iconic innovation that uses pressurized air in a durable.",
+            "userId": 1
+        },
+        {
+            
+            "name": "Cap",
+            "productType": "Urban Cap",
+            "price": 15,
+            "rating": 3,
+            "image":"",
+            "description": "Cap Air our iconic innovation that uses pressurized air in a durable.",
+            "userId": 1
+        },
+        {
+            
+            "name": "Shirt",
+            "productType": "Dress Shirt",
+            "price": 15,
+            "rating": 3,
+            "image":"",
+            "description": "Cap Air our iconic innovation that uses pressurized air in a durable.",
+            "userId": 1
+        },
+        {
+            
+            "name": "Cap",
+            "productType": "Sport Cap",
+            "price": 15,
+            "rating": 3,
+            "image":"",
+            "description": "Cap Air our iconic innovation that uses pressurized air in a durable.",
+            "userId": 1
+        },
+        {
+            
+            "name": "pants",
+            "productType": "Sport pants",
+            "price": 15,
+            "rating": 3,
+            "image":"",
+            "description": "Cap Air our iconic innovation that uses pressurized air in a durable.",
+            "userId": 1
+        },
+        {
+            
+            "name": "Pants",
+            "productType": "Sport pants",
+            "price": 15,
+            "rating": 3,
+            "image":"",
+            "description": "Cap Air our iconic innovation that uses pressurized air in a durable.",
+            "userId": 1
+        }
     ]
 }
   

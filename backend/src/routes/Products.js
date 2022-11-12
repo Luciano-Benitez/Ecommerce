@@ -10,6 +10,8 @@ const {putPriceProduct} = require('../controllers/Products');
 const {putRatingProduct} = require('../controllers/Products');
 const {putDescriptionProduct} = require('../controllers/Products');
 const {putImageProduct} = require('../controllers/Products');
+const {postProduct} = require('../controllers/Products');
+const {deleteProduct} = require('../controllers/Products');
 
 router.get('/getProducts', getProducts);
 router.get('/getProductsForAdm/:id', getProductsForAdmin);
@@ -20,5 +22,7 @@ router.put('/putPriceProduct', putPriceProduct);
 router.put('/putRatingProduct', putRatingProduct);
 router.put('/putDescriptionProduct', putDescriptionProduct);
 router.put('/putImageProduct', putImageProduct);
+router.post('/postProduct', postProduct);
+router.delete('/deleteProduct/:id', deleteProduct);
 
 module.exports = router;
