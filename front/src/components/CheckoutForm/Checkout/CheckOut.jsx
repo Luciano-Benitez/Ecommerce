@@ -18,7 +18,7 @@ export default function CheckOut() {
     <>
     <main>
       <Paper className={st.Paper} >
-        <Typography component='h1' variant='h4' align='center' >
+        <Typography style={{color:'#0AA1DD'}} component='h1' variant='h4' align='center' >
           CheckOut
         </Typography>
         <Stepper activeStep={activeStep} >

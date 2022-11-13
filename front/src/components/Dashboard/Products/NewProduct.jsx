@@ -70,7 +70,7 @@ export default function NewProduct() {
           }}
         >
             <AddToPhotosIcon color='primary' fontSize="large" />
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h5" style={{color:'#0AA1DD'}}>
             Create Product
           </Typography>
         <IconButton  sx={{display:'flex', marginRight:'200%'}} >

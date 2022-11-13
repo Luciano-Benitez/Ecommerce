@@ -164,7 +164,7 @@ export default function DashboardAdmin() {
           <IconButton color="inherit" aria-label="open drawer" onClick={handleMenu} edge="start" sx={{
               ...(openMenu && { display: 'none' }),
             }}><MenuIcon/></IconButton>
-          <Typography variant="h6" noWrap component="div">{`Welcome ${fullName}`}</Typography>
+          <Typography variant="h6" noWrap component="div">{`¡Welcome ${fullName}!`}</Typography>
           <IconButton sx={{marginRight:'2rem'}} onClick={handleProfile} aria-expanded={profile}  >
             <Avatar src={profilePicture} sx={{ width: 45, height: 45 }} />
           </IconButton>

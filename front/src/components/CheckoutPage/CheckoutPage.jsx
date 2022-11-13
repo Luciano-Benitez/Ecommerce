@@ -29,7 +29,7 @@ const CheckoutPage = () => {
     <div className={st.Principal} >
         <Grid container spacing={3}>
             <Grid item xs={12}  >
-                <Typography align='center' gutterButtom variant='h4' >
+                <Typography style={{color:'#0AA1DD'}} align='center' gutterButtom variant='h4' >
                     Shopping Cart
                 </Typography>
             </Grid>
