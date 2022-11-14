@@ -1,4 +1,4 @@
-Para ejecutar el codigo primero hay que completar los datos que estan en el archivo ".env" en el backend con los siguientes datos;
+Para ejecutar el codigo primero hay que crear el archivo ".env" en el backend con los siguientes datos;
 
 DB_USER = postgres
 
