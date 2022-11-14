@@ -41,7 +41,7 @@ exports.postUsers = async(req, res = response) => {
             html: `<p>Por favor confirme su cuenta de Usuario <a href="${urlConfirm}">Confirmar</a></p>`
         });
         
-        res.status(201).json(User);
+        res.status(201).json({ok:true, User});
     } catch (error) {
         res.json('Error: ', error);
     }

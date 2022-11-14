@@ -52,7 +52,6 @@ export default function NewProduct() {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(postNewProduct(state));
-        alert('');
         setState({name: '', productType: '',
             price: '', rating:'', image:'',
             description: '', userId:''});
@@ -151,7 +150,7 @@ export default function NewProduct() {
               disabled={!state.name || !state.productType || !state.price || !state.rating || !state.description}
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign Up
+              Create 
             </Button>
           </Box>
         </Box>

@@ -9,13 +9,11 @@ import {fetchLogin, fetchRestorePassword, fetchResetPassword} from '../helpers/s
 import {cloudynary} from '../helpers/Cloudinary';
 import Swl from 'sweetalert2';
 import axios from 'axios';
-import { ConstructionOutlined } from '@mui/icons-material';
 
 export const postNewProduct = (payload) => { 
     return async (dispatch) => {
         const result = await axios.post('http://localhost:3001/postProduct', payload);
         const data = result.data;
-        console.log('data:', data);
         if(data.ok) {
             dispatch({
                 type: POST_PRODUCT,
@@ -65,9 +63,9 @@ export function postUser(payload){
 };
 export function postAdmin(payload){
     return async function() {
-        const resultPost = await axios.post('http://localhost:3001/postAdmin', payload);
+        const resultPost = await axios.post('http://localhost:3001/postAdmin', payload);            
         return resultPost
-    }
+    };
 };
 
 export const loguin = (user) => ({

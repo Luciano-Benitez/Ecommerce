@@ -11,6 +11,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {useDispatch} from 'react-redux'
 import {postUser, uploadImageCloud} from '../../actions/index';
+import Swl from 'sweetalert2';
 
 
 function Copyright(props) {
@@ -60,7 +61,8 @@ export default function SignUp() {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(postUser(state));
-        alert(`¡Cuenta creada con exito!. Por favor confirme su cuenta a travez de su correo ${state.email}`);
+        Swl.fire('Account Created successfully.',
+        'Please confirm your account through your email');
         setState({name: '', email: '', password: '', img:''});
         history('/');
     };

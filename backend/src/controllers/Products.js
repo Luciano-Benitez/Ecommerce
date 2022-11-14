@@ -3,11 +3,9 @@ const {Products} = require('../db');
 exports.postProduct = async (req, res = response) => {
     try {
         const {name, productType, price, rating, image, description, userId } = req.body;
-        console.log('Body:', req.body);
         const postProduct = await Products.create({
             name, productType, price, rating, image:[image], description, userId
         });
-        console.log('product:', postProduct);
         postProduct !== undefined && res.status(200).json({ok:true});
     } catch (error) {
         console.log('Error:', error);

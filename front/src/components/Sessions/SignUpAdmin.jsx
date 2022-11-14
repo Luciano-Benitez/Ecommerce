@@ -60,7 +60,6 @@ export default function SignUpAdmin() {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(postAdmin(state));
-        alert(`¡Cuenta creada con exito!. Por favor confirme su cuenta a travez de su correo ${state.email}`);
         setState({name: '', email: '', password: '', img:''});
         history('/');
     };
