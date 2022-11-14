@@ -8,7 +8,8 @@ DB_HOST = localhost
 
 DB_NAME = 'Nombre de la base de datos que crearon en PostgreSQL'
 
-EMAIL = 'Un correo para el email para autenticacion de cuenta'
+EMAIL = 'Un correo para el email de autenticacion de cuenta'
+
 EMAIL_PASS = atcorkdpqcttguwo 
 
 SECRET_JWT_CODE = 'Un texto aleatorio como clave secreta'
