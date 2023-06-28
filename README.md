@@ -1,3 +1,5 @@
+App de Ecommerce con registro, login y confirmación de cuenta. Dashboard para registro modificación y eliminación de productos y una pasarela de pagos
+
 Para ejecutar el codigo primero hay que crear el archivo ".env" en el backend con los siguientes datos;
 
 DB_USER = postgres
